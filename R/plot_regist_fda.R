@@ -17,6 +17,7 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
 ) {
   require(ggplot2)
   require(gridExtra)
+  require(fdasrvf)
   #  plots the output of registration function register.fd, one curve at a time
   #
   #  Argument:
@@ -333,5 +334,14 @@ plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
   ## ymat: original; 
   ## y0mat: mean to be registered to
   ## yregmat: registered curve
-  
+
+  PhaseDist.Before <- fn_pairwiseDistance_fdasrvf(Mat=ymat, Xaxis=argfine)
+  PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat=yregmat, Xaxis=argfine)
+  PhaseDistPlot.Before <- qplot(Dx, data=PhaseDist.Before, geom="histogram", binwidth=0.02) + 
+    ggtitle('Pairwise elastic distance, Before registration') +
+    xlab('Phase Distance')
+  PhaseDistPlot.After <- qplot(Dx, data=PhaseDist.After, geom="histogram", binwidth=0.02) + 
+    ggtitle('Pairwise elastic distance, After registration') +
+    xlab('Phase Distance')
+  grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol=1)
 }

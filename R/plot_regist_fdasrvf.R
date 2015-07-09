@@ -144,7 +144,7 @@ plotbyCurve_regist_fdasrv <- function(registOutput, TrueWarp=NULL,
   }
 }
 
-plotAll_regist_fdasrv <- function(registOutput, TrueWarp=NULL,
+plotAll_regist_fdasrv <- function(registOutput, TrueWarp=NULL, time,
                                   Lambda=NULL,
                                   Ylabel=NULL,
                                   Xlabel=NULL
@@ -280,5 +280,16 @@ plotAll_regist_fdasrv <- function(registOutput, TrueWarp=NULL,
           legend.position = '' 
     )
   plot(Plot.Warp)
+  
+  PhaseDist.Before <- fn_pairwiseDistance_fdasrvf(Mat=f0, Xaxis=time)
+  PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat=fn, Xaxis=time)
+  PhaseDistPlot.Before <- qplot(Dx, data=PhaseDist.Before, geom="histogram", binwidth=0.02) + 
+    ggtitle('Pairwise elastic distance, Before registration') +
+    xlab('Phase Distance')
+  PhaseDistPlot.After <- qplot(Dx, data=PhaseDist.After, geom="histogram", binwidth=0.02) + 
+    ggtitle('Pairwise elastic distance, After registration') +
+    xlab('Phase Distance')
+  plot(grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol=1))
 }
+
 
