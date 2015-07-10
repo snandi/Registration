@@ -13,8 +13,18 @@ loadPackages <- function(CRANMirror=83){
   Packages <- c(
     'boot',
     'car',
+    'cluster',
+    'clusterSim',
+    'clValid',
+    'fda',
+    'fdakma',
+    'fdasrvf',
     'ggplot2',
+    'grid',
+    'gridExtra',
+    'gtools',
     'lattice',
+    'mclust',
     'plyr',
     'reshape',
     'reshape2'
@@ -26,7 +36,7 @@ loadPackages <- function(CRANMirror=83){
       print(paste('Installing', Package))
       try(install.packages(Package, dependencies = TRUE))
     } else{
-      print(paste(Package, 'already exists'))
+      print(paste('Loading', Package))
       require(package=Package, character.only=T)
     }
   }
