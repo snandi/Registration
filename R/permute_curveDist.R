@@ -64,13 +64,16 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05){
   Maintitle <- paste('Permutation test, with L1 norm similarity,', Nperm, 'iterations, p-value', pval)
   Color <- 'royalblue1' # 'turquoise2'
   Xlim <- c(min(Dist_null, Dist_Obs)*0.999, 1)
-  Plot_pval <- qplot() + geom_histogram(aes(Dist_null), binwidth=0.001, fill=Color, color=Color) + 
+  Xlab <- expression(paste('Null distribution of similarity index,          [Reject when ', T[obs], ' < ', T[crit], ' ]'))
+  Binwidth <- min(0.001, diff(range(Dist_null))/30)
+  
+  Plot_pval <- qplot() + geom_histogram(aes(Dist_null), binwidth=Binwidth, fill=Color, color=Color) + 
     xlim(Xlim) + 
     geom_vline(xintercept=Dist_Obs, colour='orangered', size=1) +
     geom_vline(xintercept=qval, colour='gray10', size=1) +
     annotate(geom='text', x=Dist_Obs, y=Inf, vjust=2, label='Obs', col='orangered') + 
     annotate(geom='text', x=qval, y=Inf, vjust=4, label='Crit', col='gray10') +
-    ggtitle(Maintitle)
+    ggtitle(Maintitle) + xlab(label=Xlab)
 
   return(list(pval = pval, qval = qval, Dist_Obs = Dist_Obs, Dist_null = Dist_null, 
               Plot_pval=Plot_pval))
