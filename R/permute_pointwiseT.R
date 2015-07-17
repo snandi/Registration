@@ -86,7 +86,20 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlo
     TPlot <- 0
   }
 
+  ## Plotting the pvalue
+  Maintitle <- paste('Permutation test, with T-type statistic,', Nperm, 'iterations, p-value', pval)
+  Color <- 'royalblue1' # 'turquoise2'
+  Binwidth <- round(diff(range(Tnull))/30, 1)
+  Xlim <- c(min(Tnull, Tobs)*0.999, max(Tnull, Tobs, 1)*1.001)
+  Plot_pval <- qplot() + geom_histogram(aes(Tnull), fill=Color, binwidth=Binwidth, color=Color) + 
+    xlim(Xlim) + 
+    geom_vline(xintercept=Tobs, colour='orangered', size=1) +
+    geom_vline(xintercept=qval, colour='gray10', size=1) +
+    annotate(geom='text', x=Tobs, y=Inf, vjust=2, label='Obs', col='orangered') + 
+    annotate(geom='text', x=qval, y=Inf, vjust=4, label='Crit', col='gray10') +
+    ggtitle(Maintitle)
+  
   return(list(pval = pval, qval = qval, Tobs = Tobs, Tnull = Tnull, 
               Tvals = Tvals, Tnullvals = Tnullvals, qvals.pts = qvals.pts, 
-              pvals.pts = pvals.pts, TPlot=TPlot))
+              pvals.pts = pvals.pts, TPlot=TPlot, Plot_pval=Plot_pval))
 }

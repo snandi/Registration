@@ -1,6 +1,6 @@
 fn_pairwiseDistance_fdasrvf <- function(Mat, Xaxis){
   require(gtools) 
-  require(fdasrv)
+  require(fdasrvf)
   ## Assume that similarity measure is to be estimated between columns
   ## of the matrix. 
   ## Assumed that the x-axis of all the functions will be the same
