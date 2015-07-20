@@ -16,9 +16,11 @@ loadPackages <- function(CRANMirror=83){
     'cluster',
     'clusterSim',
     'clValid',
+    'doParallel',  ## For parallel execution with foreach
     'fda',
     'fdakma',
     'fdasrvf',
+    'foreach',
     'ggplot2',
     'grid',
     'gridExtra',

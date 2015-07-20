@@ -290,6 +290,7 @@ plotAll_regist_fdasrv <- function(registOutput, TrueWarp=NULL, time,
     ggtitle('Pairwise elastic distance, After registration') +
     xlab('Phase Distance')
   plot(grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol=1))
+  return(Data.Warp)
 }
 
 

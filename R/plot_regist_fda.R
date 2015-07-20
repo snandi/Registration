@@ -344,4 +344,6 @@ plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
     ggtitle('Pairwise elastic distance, After registration') +
     xlab('Phase Distance')
   grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol=1)
+  colnames(Data.Warp) <- c('OriginalTime', 'Curve', 'WarpedTime')
+  return(Data.Warp)
 }
