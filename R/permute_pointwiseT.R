@@ -48,7 +48,8 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlo
     tvar1 <- apply(X=MatAll_Perm[, 1:N1], MARGIN=1, FUN=var)/N1
     tvar2 <- apply(X=MatAll_Perm[, N1+(1:N2)], MARGIN=1, FUN=var)/N2
     Tnullvals[, i] = abs(tmean1 - tmean2)/sqrt(tvar1 + tvar2)
-    Tnull[i] = max(Tnullvals[, i])   ## This is the test statistic for null distribution
+    # Tnull[i] = max(Tnullvals[, i])   ## This is the test statistic recommended by fda package
+    Tnull[i] = median(Tnullvals[, i])   ## This is the test statistic for null distribution
   }
   
   ## Statistics for observed data
@@ -57,7 +58,8 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlo
   var1 <- apply(X=Mat1, MARGIN=1, FUN=var)/N1
   var2 <- apply(X=Mat2, MARGIN=1, FUN=var)/N2
   Tvals <- abs(mean1 - mean2)/sqrt(var1 + var2)
-  Tobs <- max(Tvals)    ## This is the observed value of the test statistic
+  # Tobs <- max(Tvals)    ## This is the observed value of the test statistic, recommended by fda
+  Tobs <- median(Tvals)    ## This is the observed value of the test statistic
   pval <- mean(Tobs < Tnull)  
   qval <- quantile(Tnull, q)
   
@@ -74,7 +76,7 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlo
     TValueType <- factor(TValueType)
   })
   
-  Ylim <- c(min(Tvals, qvals.pts) - 0.1, max(Tobs, qval) + 0.1)
+  Ylim <- c(min(Tvals, qvals.pts) - 0.1, max(Tvals, qval) + 0.1)
   MainTitle <- paste('Pointwise T statistics for', Nperm, 'Permutations')
   if(returnPlot==TRUE){
     TPlot <- qplot(x=argvals, y=TValues, data=DataToPlot) + 
