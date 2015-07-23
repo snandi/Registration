@@ -77,19 +77,18 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05,
   ## Plotting the data
   Maintitle <- paste('Permutation test, with L1 norm similarity,', Nperm, 'iterations, p-value', pval)
   Color <- 'royalblue1' # 'turquoise2'
+  ## If Dist_Obs is outside the null distribution, adjust the Xlim accordingly
   if(inRange(x = Dist_Obs, Range = range(Dist_null))){
     XMin <- min(Dist_null)
     XMax <- max(Dist_null)
     Xlim <- range(Dist_null)
-    #Xlim <- c(XMin - 0.001*XMin, XMax + 0.001*XMax)
   } else{
+    print('Using this one')
     XMin <- min(Dist_null, Dist_Obs)
     XMax <- max(Dist_null, Dist_Obs)
-    if(min(Dist_null, Dist_Obs) < 0) {
-      Xlim <- c(min(Dist_null, Dist_Obs)*1.01, max(Dist_null, Dist_Obs)*1.01)
-    } else{
-      Xlim <- c(min(Dist_null, Dist_Obs)*0.99, min(Dist_null, Dist_Obs)*1.01)
-    }
+    RangeDiff <- diff(range(Dist_null))/10    
+    Xlim <- c(XMin - RangeDiff, XMax + RangeDiff)
+    print(Xlim)
   }
   
   Xlab <- expression(paste('Null distribution of similarity index,          [Reject when ', T[obs], ' < ', T[crit], ' ]'))
