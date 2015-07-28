@@ -5,15 +5,15 @@
 # 0 = blank, 1 = solid, 2 = dashed, 3 = dotted, 4 = dotdash, 5 = longdash, 6 = twodash
 
 # registOutput <- Regfd.M
-# TrueWarp=NULL
-# Lambda=NULL
-# Ylabel=NULL
-# Xlabel=NULL
+# TrueWarp = NULL
+# Lambda = NULL
+# Ylabel = NULL
+# Xlabel = NULL
 
-plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
-                                   Lambda=NULL,
-                                   Ylabel=NULL,
-                                   Xlabel=NULL
+plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
+                                   Lambda = NULL,
+                                   Ylabel = NULL,
+                                   Xlabel = NULL
 ) {
   require(ggplot2)
   require(gridExtra)
@@ -76,7 +76,7 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
   nfine   <- 201
   argfine <- seq(yrange[1],yrange[2],len=nfine)
   
-  if (!is.null(TrueWarp)) argOrig <- seq(yrange[1],yrange[2],len=nrow(TrueWarp))  
+  if (!is.null(TrueWarp)) argOrig <- seq(yrange[1],yrange[2],len = nrow(TrueWarp))  
   
   #  evaluate the required functional on over this fine mesh
   ymat    <- eval.fd(argfine, yfd)
@@ -101,16 +101,16 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
   if (dim(y0mat)[2] == 1) y0mat = y0mat %*% matrix(1,1,ncurve)
   ylimit   <- c(min(ymat),max(ymat))
   
-  par(mfrow=c(1,2),pty="s")
+  par(mfrow=c(1,2),pty = "s")
   i <- 1
   for (i in 1:ncurve) {
     ## ymat: original; 
     ## y0mat: mean to be registered to
     ## yregmat: registered curve
     
-    Data.Orig <- as.data.frame(cbind(argfine, ymat=ymat[,i]))
-    Data.Mean <- as.data.frame(cbind(argfine, y0mat=y0mat[,i]))
-    Data.Reg <- as.data.frame(cbind(argfine, yregmat=yregmat[,i]))
+    Data.Orig <- as.data.frame(cbind(argfine, ymat = ymat[,i]))
+    Data.Mean <- as.data.frame(cbind(argfine, y0mat = y0mat[,i]))
+    Data.Reg <- as.data.frame(cbind(argfine, yregmat = yregmat[,i]))
     if(is.null(Xlabel)) Xlabel <- 'Pixel Position'
     if(is.null(Ylabel)) Ylabel <- 'Intensity'
     MainTitle <- paste("Curve Number",casename[i])
@@ -120,50 +120,50 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
     
     PlotCurve <- ggplot()+
       ylim(ylimit) +
-      geom_line(data=Data.Orig, aes(x=argfine, y=ymat, col='Original'), linetype=2, size=1) +
-      geom_line(data=Data.Mean, aes(x=argfine, y=y0mat, col='Mean'), linetype=1, size=1) + 
-      geom_line(data=Data.Reg, aes(x=argfine, y=yregmat, col='Registered'), linetype=1, size=1) +
-      xlab(label = Xlabel) + ylab(label=Ylabel) +
+      geom_line(data = Data.Orig, aes(x = argfine, y = ymat, col = 'Original'), linetype = 2, size = 1) +
+      geom_line(data = Data.Mean, aes(x = argfine, y = y0mat, col = 'Mean'), linetype = 1, size = 1) + 
+      geom_line(data = Data.Reg, aes(x = argfine, y = yregmat, col = 'Registered'), linetype = 1, size = 1) +
+      xlab(label = Xlabel) + ylab(label = Ylabel) +
       ggtitle(MainTitle) +
-      scale_colour_manual(name='', values = c('Original'=Col.Orig, 'Mean'=Col.Mean, 'Registered'=Col.Reg),
+      scale_colour_manual(name = '', values = c('Original' = Col.Orig, 'Mean' = Col.Mean, 'Registered' = Col.Reg),
                           breaks = c("Original", "Mean", "Registered")) +
-      theme(plot.title=element_text(face="bold", size=12, colour="white"),
+      theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
             panel.background = element_rect(fill = 'black'), 
-            plot.background = element_rect(color='black', fill = "gray10"), 
-            axis.text = element_text(colour = "white", size=10), 
-            axis.title.x = element_text(colour = "white", size=10), 
-            axis.title.y = element_text(colour = "white", size=10), 
-            panel.grid.major = element_line(colour="gray30", size=0.35), 
-            panel.grid.minor = element_line(colour="gray20", size=0.25),
+            plot.background = element_rect(color = 'black', fill = "gray10"), 
+            axis.text = element_text(colour = "white", size = 10), 
+            axis.title.x = element_text(colour = "white", size = 10), 
+            axis.title.y = element_text(colour = "white", size = 10), 
+            panel.grid.major = element_line(colour = "gray30", size = 0.35), 
+            panel.grid.minor = element_line(colour = "gray20", size = 0.25),
             legend.position = c(0.5,0.9), 
             legend.direction = 'horizontal', 
-            legend.text = element_text(size=10, colour='white'),
+            legend.text = element_text(size = 10, colour = 'white'),
             legend.background = element_rect(fill = 'black')
       )
     
     #PlotCurve
     
-    Data.Warp <- as.data.frame(cbind(argfine, Warp=warpmat[,i]))
+    Data.Warp <- as.data.frame(cbind(argfine, Warp = warpmat[,i]))
     if (is.null(TrueWarp)){
       PlotWarp <- ggplot()+
-        geom_line(data=Data.Warp, aes(x=argfine, y=Warp, col='Warping fn'), linetype=1, 
-                  size=1, colour=Col.Reg) +
-        geom_abline(intercept=0, slope=1, col='white') + 
+        geom_line(data = Data.Warp, aes(x = argfine, y = Warp, col = 'Warping fn'), linetype = 1, 
+                  size = 1, colour = Col.Reg) +
+        geom_abline(intercept = 0, slope = 1, col = 'white') + 
         xlab(label = '') + ylab(label = '') +
         ggtitle('Warping Functions, Using Min Eig Value') +
         theme(
-          plot.title=element_text(face="bold", size=12, colour="white"),
+          plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color='black', fill = "gray10"), 
-          axis.text = element_text(colour = "white", size=10), 
-          panel.grid.major = element_line(colour="gray30", size=0.35), 
-          panel.grid.minor = element_line(colour="gray20", size=0.25)
+          plot.background = element_rect(color = 'black', fill  =  "gray10"), 
+          axis.text = element_text(colour = "white", size = 10), 
+          panel.grid.major = element_line(colour = "gray30", size = 0.35), 
+          panel.grid.minor = element_line(colour = "gray20", size = 0.25)
         )
     } else{
-      Data.Warp <- cbind(Data.Warp, TrueWarp=TrueWarp[,i])
+      Data.Warp <- cbind(Data.Warp, TrueWarp = TrueWarp[,i])
       ###???!!! Add the code with TrueWarp !!!???###
     }
-    grid.arrange(PlotCurve, PlotWarp, ncol=1)  
+    grid.arrange(PlotCurve, PlotWarp, ncol = 1)  
   }
   return(yregmat)
 }
@@ -172,15 +172,18 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp=NULL,
 ## Plot Registration output from fda, all curves together
 #########################################################################################
 # registOutput <- Regfd.M
-# TrueWarp=NULL
-# Lambda=NULL
-# Ylabel=NULL
-# Xlabel=NULL
-
-plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
-                                   Lambda=NULL,
-                                   Ylabel=NULL,
-                                   Xlabel=NULL
+# TrueWarp = NULL
+# Lambda = NULL
+# Ylabel = NULL
+# Xlabel = NULL
+# This function currently prints the plots it generates. It should be wrapped inside a
+# pdf object call. 
+plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
+                                   Lambda = NULL,
+                                   Ylabel = NULL,
+                                   Xlabel = NULL,
+                               BeforeAfterDist = TRUE,
+                               Xarg_fine = NULL
 ) {
   require(ggplot2)
   require(gridExtra)
@@ -240,8 +243,13 @@ plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
   ybasis  <- yfd$basis
   yrange  <- ybasis$rangeval
   ynbasis <- ybasis$nbasis
-  nfine   <- 201
-  argfine <- seq(yrange[1],yrange[2],len=nfine)
+  if(is.null(Xarg_fine)){
+    nfine   <- 201
+    argfine <- seq(yrange[1],yrange[2],len = nfine)
+  } else{
+    nfine <- length(Xarg_fine)
+    argfine <- Xarg_fine
+  }
   
   if (!is.null(TrueWarp)) argOrig <- seq(yrange[1],yrange[2],len=nrow(TrueWarp))  
   
@@ -268,65 +276,86 @@ plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
   if (dim(y0mat)[2] == 1) y0mat = y0mat %*% matrix(1,1,ncurve)
   ylimit   <- c(min(ymat),max(ymat))
   
-  Data.Orig <- melt(data=ymat, id="Curve")
+  Data.Orig <- melt(data = ymat, id = "Curve")
   MainTitle <- paste('Original Curves, Using Min Eig Value')
   colnames(Data.Orig) <- c('Pixel', 'Curve', 'Intensity')
-  Plot.Orig  <- ggplot(data=Data.Orig, aes_string(x="Pixel", y="Intensity", 
-                                                  colour="Curve", group="Curve")) + 
+  Data.Orig$Pixel <- argfine
+  Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(ymat))$estimate, 
+                                   Curve = 'Median'))
+  Median_toRegist <- within(data=Median_toRegist,{
+    Pixel <- as.numeric(as.vector(Pixel))
+    Intensity <- as.numeric(as.vector(Intensity))
+  })
+  
+  Plot.Orig  <- ggplot(data = Data.Orig, aes_string(x = "Pixel", y = "Intensity", 
+                                                  colour = "Curve", group = "Curve")) + 
     geom_line() + 
-    ggtitle(MainTitle) +
-    theme(plot.title=element_text(face="bold", size=12, colour="white"),
+    ggtitle(MainTitle) + 
+    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
+    theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color='black', fill = "gray10"), 
-          axis.text = element_text(colour = "white", size=10), 
-          axis.title.x = element_text(colour = "white", size=10), 
-          axis.title.y = element_text(colour = "white", size=10), 
-          panel.grid.major = element_line(colour="gray30", size=0.35), 
-          panel.grid.minor = element_line(colour="gray20", size=0.25),
+          plot.background = element_rect(color = 'black', fill = "gray10"), 
+          axis.text = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 10), 
+          axis.title.y = element_text(colour = "white", size = 10), 
+          panel.grid.major = element_line(colour="gray30", size = 0.35), 
+          panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
   
   plot(Plot.Orig)
   
-  Data.Regist <- melt(data=yregmat, id="Curve")
+  Data.Regist <- melt(data = yregmat, id = "Curve")
   MainTitle <- paste('Registered Curves, Using Min Eig Value')
   colnames(Data.Regist) <- c('Pixel', 'Curve', 'Intensity')
-  Plot.Regist  <- ggplot(data=Data.Regist, aes_string(x="Pixel", y="Intensity", 
-                                                      colour="Curve", group="Curve")) + 
+  Data.Regist$Pixel <- argfine
+  if(is.null(Xlabel))  Xlabel <- 'Pixel'
+  Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(yregmat))$estimate, 
+                                         Curve = 'Median'))
+  Median_toRegist <- within(data=Median_toRegist,{
+    Pixel <- as.numeric(as.vector(Pixel))
+    Intensity <- as.numeric(as.vector(Intensity))
+  })
+  
+  Plot.Regist  <- ggplot(data = Data.Regist, aes_string(x = "Pixel", y = "Intensity", 
+                                                      colour = "Curve", group = "Curve")) + 
     geom_line() + 
-    ggtitle(MainTitle) +
-    theme(plot.title=element_text(face="bold", size=12, colour="white"),
+    ggtitle(MainTitle) + 
+    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
+    xlab(label = Xlabel) +
+    theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color='black', fill = "gray10"), 
-          axis.text = element_text(colour = "white", size=10), 
-          axis.title.x = element_text(colour = "white", size=10), 
-          axis.title.y = element_text(colour = "white", size=10), 
-          panel.grid.major = element_line(colour="gray30", size=0.35), 
-          panel.grid.minor = element_line(colour="gray20", size=0.25),
+          plot.background = element_rect(color = 'black', fill = "gray10"), 
+          axis.text = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 10), 
+          axis.title.y = element_text(colour = "white", size = 10), 
+          panel.grid.major = element_line(colour = "gray30", size = 0.35), 
+          panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
   plot(Plot.Regist)
   
-  Data.Warp <- melt(data=warpmat, id="Curve")
+  Data.Warp <- melt(data = warpmat, id = "Curve")
   MainTitle <- paste('Warping functions, Using Min Eig Value')
   colnames(Data.Warp) <- c('Pixel', 'Curve', 'Warp')
   yrangediff <- yrange[2] - yrange[1]
   Data.Warp$Pixel <- Data.Warp$Pixel * yrangediff/ nfine + yrange[1]
   Data.Warp$Curve <- as.factor(Data.Warp$Curve)
   
-  Plot.Warp  <- ggplot(data=Data.Warp, aes_string(x="Pixel", y="Warp", 
-                                                  colour="Curve", group="Curve")) + 
+  Plot.Warp  <- ggplot(data = Data.Warp, aes_string(x = "Pixel", y = "Warp", 
+                                                  colour = "Curve", group = "Curve")) + 
     geom_line() + 
     ggtitle(MainTitle) +
-    geom_abline(intercept=0, slope=1, col='white', size=1) + 
-    theme(plot.title=element_text(face="bold", size=12, colour="white"),
+    geom_abline(intercept = 0, slope = 1, col = 'white', size = 1) + 
+    xlab(label = Xlabel) +
+    theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color='black', fill = "gray10"), 
-          axis.text = element_text(colour = "white", size=10), 
-          axis.title.x = element_text(colour = "white", size=10), 
-          axis.title.y = element_text(colour = "white", size=10), 
-          panel.grid.major = element_line(colour="gray30", size=0.35), 
-          panel.grid.minor = element_line(colour="gray20", size=0.25),
+          plot.background = element_rect(color = 'black', fill  =  "gray10"), 
+          axis.text = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 10), 
+          axis.title.y = element_text(colour = "white", size = 10), 
+          panel.grid.major = element_line(colour="gray30", size = 0.35), 
+          panel.grid.minor = element_line(colour="gray20", size = 0.25),
           legend.position = '' 
     )
   plot(Plot.Warp)
@@ -334,16 +363,17 @@ plotAll_regist_fda <- function(registOutput, TrueWarp=NULL,
   ## ymat: original; 
   ## y0mat: mean to be registered to
   ## yregmat: registered curve
-
-  PhaseDist.Before <- fn_pairwiseDistance_fdasrvf(Mat=ymat, Xaxis=argfine)
-  PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat=yregmat, Xaxis=argfine)
-  PhaseDistPlot.Before <- qplot(Dx, data=PhaseDist.Before, geom="histogram", binwidth=0.02) + 
-    ggtitle('Pairwise elastic distance, Before registration') +
-    xlab('Phase Distance')
-  PhaseDistPlot.After <- qplot(Dx, data=PhaseDist.After, geom="histogram", binwidth=0.02) + 
-    ggtitle('Pairwise elastic distance, After registration') +
-    xlab('Phase Distance')
-  grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol=1)
+  if( BeforeAfterDist ){
+    PhaseDist.Before <- fn_pairwiseDistance_fdasrvf(Mat = ymat, Xaxis = argfine)
+    PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat = yregmat, Xaxis = argfine)
+    PhaseDistPlot.Before <- qplot(Dx, data = PhaseDist.Before, geom = "histogram", binwidth = 0.02) + 
+      ggtitle('Pairwise elastic distance, Before registration') +
+        xlab('Phase Distance')
+    PhaseDistPlot.After <- qplot(Dx, data = PhaseDist.After, geom = "histogram", binwidth = 0.02) + 
+      ggtitle('Pairwise elastic distance, After registration') +
+        xlab('Phase Distance')
+    grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol = 1)
+  }
   colnames(Data.Warp) <- c('OriginalTime', 'Curve', 'WarpedTime')
   return(Data.Warp)
 }

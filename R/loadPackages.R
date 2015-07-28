@@ -29,7 +29,8 @@ loadPackages <- function(CRANMirror=83){
     'mclust',
     'plyr',
     'reshape',
-    'reshape2'
+    'reshape2',
+    'robustX'   ## For multivariate median
   )
 
   ## Requiring packages and installing them if something doesnt exist
