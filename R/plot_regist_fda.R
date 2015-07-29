@@ -179,10 +179,12 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
 # This function currently prints the plots it generates. It should be wrapped inside a
 # pdf object call. 
 plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
-                                   Lambda = NULL,
-                                   Ylabel = NULL,
-                                   Xlabel = NULL,
+                               Lambda = NULL,
+                               TitleText = "",
+                               Ylabel = NULL,
+                               Xlabel = NULL,
                                BeforeAfterDist = TRUE,
+                               PlotBeforeRegist = TRUE,
                                Xarg_fine = NULL
 ) {
   require(ggplot2)
@@ -277,7 +279,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   ylimit   <- c(min(ymat),max(ymat))
   
   Data.Orig <- melt(data = ymat, id = "Curve")
-  MainTitle <- paste('Original Curves, Using Min Eig Value')
+  MainTitle <- paste('Before Registration')
   colnames(Data.Orig) <- c('Pixel', 'Curve', 'Intensity')
   Data.Orig$Pixel <- argfine
   Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(ymat))$estimate, 
@@ -286,6 +288,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     Pixel <- as.numeric(as.vector(Pixel))
     Intensity <- as.numeric(as.vector(Intensity))
   })
+  if(is.null(Xlabel))  Xlabel <- 'Pixel'
+  if(is.null(Ylabel))  Xlabel <- 'Intensity'
   
   Plot.Orig  <- ggplot(data = Data.Orig, aes_string(x = "Pixel", y = "Intensity", 
                                                   colour = "Curve", group = "Curve")) + 
@@ -296,20 +300,21 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill = "gray10"), 
           axis.text = element_text(colour = "white", size = 10), 
-          axis.title.x = element_text(colour = "white", size = 10), 
-          axis.title.y = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 12), 
+          axis.title.y = element_text(colour = "white", size = 12), 
           panel.grid.major = element_line(colour="gray30", size = 0.35), 
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
-  
-  plot(Plot.Orig)
+
+  if( PlotBeforeRegist ) plot(Plot.Orig)
   
   Data.Regist <- melt(data = yregmat, id = "Curve")
-  MainTitle <- paste('Registered Curves, Using Min Eig Value')
+  MainTitle <- paste('After Registration, Using Min Eig Value', '\n', TitleText)
   colnames(Data.Regist) <- c('Pixel', 'Curve', 'Intensity')
   Data.Regist$Pixel <- argfine
   if(is.null(Xlabel))  Xlabel <- 'Pixel'
+  if(is.null(Ylabel))  Xlabel <- 'Intensity'
   Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(yregmat))$estimate, 
                                          Curve = 'Median'))
   Median_toRegist <- within(data=Median_toRegist,{
@@ -323,12 +328,13 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     ggtitle(MainTitle) + 
     geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
     xlab(label = Xlabel) +
+      ylab(label = Ylabel) + 
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill = "gray10"), 
           axis.text = element_text(colour = "white", size = 10), 
-          axis.title.x = element_text(colour = "white", size = 10), 
-          axis.title.y = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 12), 
+          axis.title.y = element_text(colour = "white", size = 12), 
           panel.grid.major = element_line(colour = "gray30", size = 0.35), 
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
@@ -336,7 +342,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   plot(Plot.Regist)
   
   Data.Warp <- melt(data = warpmat, id = "Curve")
-  MainTitle <- paste('Warping functions, Using Min Eig Value')
+  MainTitle <- paste('Warping functions, Using Min Eig Value', '\n', TitleText)
   colnames(Data.Warp) <- c('Pixel', 'Curve', 'Warp')
   yrangediff <- yrange[2] - yrange[1]
   Data.Warp$Pixel <- Data.Warp$Pixel * yrangediff/ nfine + yrange[1]
@@ -352,8 +358,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill  =  "gray10"), 
           axis.text = element_text(colour = "white", size = 10), 
-          axis.title.x = element_text(colour = "white", size = 10), 
-          axis.title.y = element_text(colour = "white", size = 10), 
+          axis.title.x = element_text(colour = "white", size = 12), 
+          axis.title.y = element_text(colour = "white", size = 12), 
           panel.grid.major = element_line(colour="gray30", size = 0.35), 
           panel.grid.minor = element_line(colour="gray20", size = 0.25),
           legend.position = '' 
