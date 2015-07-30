@@ -183,7 +183,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
                                TitleText = "",
                                Ylabel = NULL,
                                Xlabel = NULL,
-                               BeforeAfterDist = TRUE,
+                               BeforeAfterDistance = TRUE,
                                PlotBeforeRegist = TRUE,
                                Xarg_fine = NULL
 ) {
@@ -279,7 +279,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   ylimit   <- c(min(ymat),max(ymat))
   
   Data.Orig <- melt(data = ymat, id = "Curve")
-  MainTitle <- paste('Before Registration')
+  MainTitle <- paste('Before Registration', '\n', TitleText)
   colnames(Data.Orig) <- c('Pixel', 'Curve', 'Intensity')
   Data.Orig$Pixel <- argfine
   Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(ymat))$estimate, 
@@ -295,6 +295,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
                                                   colour = "Curve", group = "Curve")) + 
     geom_line() + 
     ggtitle(MainTitle) + 
+      xlab(label = Xlabel) +
+      ylab(label = Ylabel) + 
     geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
@@ -306,8 +308,12 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
-
-  if( PlotBeforeRegist ) plot(Plot.Orig)
+  if(!is.null(Xlabel)){
+    Iteration <- as.numeric(substr(x=Xlabel, start=nchar('After Iteration  '), stop=nchar(Xlabel)))
+    if(PlotBeforeRegist | Iteration == 1) plot(Plot.Orig)
+  } else{
+    if( PlotBeforeRegist) plot(Plot.Orig)
+  }
   
   Data.Regist <- melt(data = yregmat, id = "Curve")
   MainTitle <- paste('After Registration, Using Min Eig Value', '\n', TitleText)
@@ -327,9 +333,9 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     geom_line() + 
     ggtitle(MainTitle) + 
     geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
-    xlab(label = Xlabel) +
+      xlab(label = Xlabel) +
       ylab(label = Ylabel) + 
-    theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
+        theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill = "gray10"), 
           axis.text = element_text(colour = "white", size = 10), 
@@ -340,6 +346,18 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           legend.position = '' 
     )
   plot(Plot.Regist)
+
+  Consensus_Mean <- rowMeans(yregmat)
+  Consensus_SE <- rowSE( Data = yregmat )
+  Consensus_MeanSE <- as.data.frame(cbind(Intensity = Consensus_Mean, LL = Consensus_Mean - 2*Consensus_SE,
+                                          UU = Consensus_Mean + 2*Consensus_SE, Pixel = argfine))
+  Consensus_MeanSE$Curve <- 'Mean'
+  
+  Plot.Regist_wSE <- Plot.Regist +
+    geom_smooth( aes(y = Intensity, x = Pixel, ymin = LL, ymax = UU), data = Consensus_MeanSE, stat = 'identity', 
+                 color = 'steelblue2', size = 1, fill = 'white', alpha = 0.9)
+  
+  plot(Plot.Regist_wSE)
   
   Data.Warp <- melt(data = warpmat, id = "Curve")
   MainTitle <- paste('Warping functions, Using Min Eig Value', '\n', TitleText)
@@ -369,7 +387,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   ## ymat: original; 
   ## y0mat: mean to be registered to
   ## yregmat: registered curve
-  if( BeforeAfterDist ){
+  if( BeforeAfterDistance ){
     PhaseDist.Before <- fn_pairwiseDistance_fdasrvf(Mat = ymat, Xaxis = argfine)
     PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat = yregmat, Xaxis = argfine)
     PhaseDistPlot.Before <- qplot(Dx, data = PhaseDist.Before, geom = "histogram", binwidth = 0.02) + 
