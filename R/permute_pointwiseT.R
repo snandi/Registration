@@ -11,7 +11,9 @@
 # q = 0.05
 # returnPlot = TRUE
 
-permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlot=TRUE){
+permute_pointwiseT <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05,
+                               returnPlot = TRUE,
+                               TitleText = ''){
   require(fda)
   require(ggplot2)
   ## This function returns: 
@@ -77,19 +79,22 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm=200, argvals, q=0.05, returnPlo
   })
   
   Ylim <- c(min(Tvals, qvals.pts) - 0.1, max(Tvals, qval) + 0.1)
-  MainTitle <- paste('Pointwise T statistics for', Nperm, 'Permutations')
+  MainTitle <- paste('Pointwise T statistics for', Nperm, 'Permutations', '\n', TitleText)
   if(returnPlot==TRUE){
     TPlot <- qplot(x=argvals, y=TValues, data=DataToPlot) + 
       ylim(Ylim) + 
       geom_point(aes(color=TValueType)) +
       geom_line(aes(color=TValueType)) + 
-      ggtitle(label=MainTitle)
+      ggtitle(label=MainTitle) +
+        theme(legend.position = 'top')
+      
   } else{
     TPlot <- 0
   }
 
   ## Plotting the pvalue
-  Maintitle <- paste('Permutation test, with T-type statistic,', Nperm, 'iterations, p-value', pval)
+  Maintitle <- paste('Permutation test, with T-type statistic,', Nperm, 'iterations, p-value', pval,
+                     '\n', TitleText)
   Color <- 'royalblue1' # 'turquoise2'
   Binwidth <- round(diff(range(Tnull))/30, 1)
   Xlim <- c(min(Tnull, Tobs)*0.999, max(Tnull, Tobs, 1)*1.001)
