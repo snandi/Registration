@@ -185,7 +185,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
                                Xlabel = NULL,
                                BeforeAfterDistance = TRUE,
                                PlotBeforeRegist = TRUE,
-                               Xarg_fine = NULL
+                               Xarg_fine = NULL,
+                               saveToPDF = FALSE
 ) {
   require(ggplot2)
   require(gridExtra)
@@ -308,12 +309,6 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
-  if(!is.null(Xlabel)){
-    Iteration <- as.numeric(substr(x=Xlabel, start=nchar('After Iteration  '), stop=nchar(Xlabel)))
-    if(PlotBeforeRegist | Iteration == 1) plot(Plot.Orig)
-  } else{
-    if( PlotBeforeRegist) plot(Plot.Orig)
-  }
   
   Data.Regist <- melt(data = yregmat, id = "Curve")
   MainTitle <- paste('After Registration, Using Min Eig Value', '\n', TitleText)
@@ -345,7 +340,6 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
-  plot(Plot.Regist)
 
   Consensus_Mean <- rowMeans(yregmat)
   Consensus_SE <- rowSE( Data = yregmat )
@@ -357,7 +351,6 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     geom_smooth( aes(y = Intensity, x = Pixel, ymin = LL, ymax = UU), data = Consensus_MeanSE, stat = 'identity', 
                  color = 'steelblue2', size = 1, fill = 'white', alpha = 0.9)
   
-  plot(Plot.Regist_wSE)
   
   Data.Warp <- melt(data = warpmat, id = "Curve")
   MainTitle <- paste('Warping functions, Using Min Eig Value', '\n', TitleText)
@@ -382,7 +375,6 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
           panel.grid.minor = element_line(colour="gray20", size = 0.25),
           legend.position = '' 
     )
-  plot(Plot.Warp)
   
   ## ymat: original; 
   ## y0mat: mean to be registered to
@@ -392,12 +384,38 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     PhaseDist.After <- fn_pairwiseDistance_fdasrvf(Mat = yregmat, Xaxis = argfine)
     PhaseDistPlot.Before <- qplot(Dx, data = PhaseDist.Before, geom = "histogram", binwidth = 0.02) + 
       ggtitle('Pairwise elastic distance, Before registration') +
-        xlab('Phase Distance')
+      xlab('Phase Distance')
     PhaseDistPlot.After <- qplot(Dx, data = PhaseDist.After, geom = "histogram", binwidth = 0.02) + 
       ggtitle('Pairwise elastic distance, After registration') +
-        xlab('Phase Distance')
-    grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol = 1)
+      xlab('Phase Distance')
+    colnames(Data.Warp) <- c('OriginalTime', 'Curve', 'WarpedTime')
   }
-  colnames(Data.Warp) <- c('OriginalTime', 'Curve', 'WarpedTime')
-  return(Data.Warp)
+  
+  if(saveToPDF){
+    if(!is.null(Xlabel)){
+      Iteration <- as.numeric(substr(x=Xlabel, start=nchar('After Iteration  '), stop=nchar(Xlabel)))
+      if(PlotBeforeRegist | Iteration == 1) plot(Plot.Orig)
+    } else{
+      if( PlotBeforeRegist) plot(Plot.Orig)
+    }
+    plot(Plot.Regist)
+    plot(Plot.Regist_wSE)
+    plot(Plot.Warp)
+    if( BeforeAfterDistance ) grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol = 1)
+    return(Data.Warp)
+  } else{
+    AllPlots <- vector(mode='list', length=5) 
+    if(!is.null(Xlabel)){
+      Iteration <- as.numeric(substr(x=Xlabel, start=nchar('After Iteration  '), stop=nchar(Xlabel)))
+      if(PlotBeforeRegist | Iteration == 1) AllPlots[[1]] <- Plot.Orig
+    } else{
+      if( PlotBeforeRegist) AllPlots[[1]] <- Plot.Orig
+    }
+    AllPlots[[2]] <- Plot.Regist
+    AllPlots[[3]] <- Plot.Regist_wSE
+    AllPlots[[4]] <- Plot.Warp
+    if( BeforeAfterDistance ) AllPlots[[5]] <- grid.arrange(PhaseDistPlot.Before, PhaseDistPlot.After, ncol = 1)
+    names(AllPlots) <- c('Plot.Orig', 'Plot.Regist', 'Plot.Regist_wSE', 'Plot.Warp', 'Plot.PhaseDist')
+    return(list(AllPlots = AllPlots, Data.Warp = Data.Warp))
+  }
 }
