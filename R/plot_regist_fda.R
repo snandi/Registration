@@ -322,7 +322,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     Pixel <- as.numeric(as.vector(Pixel))
     Intensity <- as.numeric(as.vector(Intensity))
   })
-  
+
+ 
   Plot.Regist  <- ggplot(data = Data.Regist, aes_string(x = "Pixel", y = "Intensity", 
                                                       colour = "Curve", group = "Curve")) + 
     geom_line() + 
