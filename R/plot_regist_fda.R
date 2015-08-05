@@ -356,8 +356,8 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   Data.Warp <- melt(data = warpmat, id = "Curve")
   MainTitle <- paste('Warping functions, Using Min Eig Value', '\n', TitleText)
   colnames(Data.Warp) <- c('Pixel', 'Curve', 'Warp')
-  yrangediff <- yrange[2] - yrange[1]
-  Data.Warp$Pixel <- Data.Warp$Pixel * yrangediff/ nfine + yrange[1]
+  yrangediff <- yrange[2] - yrange[1] + 1
+  Data.Warp$Pixel <- Data.Warp$Pixel * yrangediff/ nfine + yrange[1] - 1
   Data.Warp$Curve <- as.factor(Data.Warp$Curve)
   
   Plot.Warp  <- ggplot(data = Data.Warp, aes_string(x = "Pixel", y = "Warp", 
