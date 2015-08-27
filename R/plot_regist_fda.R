@@ -128,8 +128,10 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
       scale_colour_manual(name = '', values = c('Original' = Col.Orig, 'Mean' = Col.Mean, 'Registered' = Col.Reg),
                           breaks = c("Original", "Mean", "Registered")) +
       theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-            panel.background = element_rect(fill = 'black'), 
-            plot.background = element_rect(color = 'black', fill = "gray10"), 
+#             panel.background = element_rect(fill = 'black'), 
+#             plot.background = element_rect(color = 'black', fill = "gray10"), 
+            panel.background = element_rect(fill = 'gray60'), 
+            plot.background = element_rect(color = 'gray60', fill = "gray60"), 
             axis.text = element_text(colour = "white", size = 10), 
             axis.title.x = element_text(colour = "white", size = 10), 
             axis.title.y = element_text(colour = "white", size = 10), 
@@ -138,7 +140,8 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
             legend.position = c(0.5,0.9), 
             legend.direction = 'horizontal', 
             legend.text = element_text(size = 10, colour = 'white'),
-            legend.background = element_rect(fill = 'black')
+#             legend.background = element_rect(fill = 'black')
+            legend.background = element_rect(fill = 'gray60')
       )
     
     #PlotCurve
@@ -298,10 +301,12 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     ggtitle(MainTitle) + 
       xlab(label = Xlabel) +
       ylab(label = Ylabel) + 
-    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
+#    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-          panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color = 'black', fill = "gray10"), 
+#           panel.background = element_rect(fill = 'black'), 
+#           plot.background = element_rect(color = 'black', fill = "gray10"), 
+          panel.background = element_rect(fill = 'gray60'), 
+          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 
@@ -331,9 +336,11 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
       xlab(label = Xlabel) +
       ylab(label = Ylabel) + 
-        theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-          panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color = 'black', fill = "gray10"), 
+    theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
+          #           panel.background = element_rect(fill = 'black'), 
+          #           plot.background = element_rect(color = 'black', fill = "gray10"), 
+          panel.background = element_rect(fill = 'gray60'), 
+          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 
@@ -350,7 +357,7 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
   
   Plot.Regist_wSE <- Plot.Regist +
     geom_smooth( aes(y = Intensity, x = Pixel, ymin = LL, ymax = UU), data = Consensus_MeanSE, stat = 'identity', 
-                 color = 'steelblue2', size = 1, fill = 'white', alpha = 0.9)
+                 color = 'gray60', size = 1, fill = 'white', alpha = 0.9)
   
   
   Data.Warp <- melt(data = warpmat, id = "Curve")
@@ -367,8 +374,10 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     geom_abline(intercept = 0, slope = 1, col = 'white', size = 1) + 
     xlab(label = Xlabel) +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-          panel.background = element_rect(fill = 'black'), 
-          plot.background = element_rect(color = 'black', fill  =  "gray10"), 
+          #           panel.background = element_rect(fill = 'black'), 
+          #           plot.background = element_rect(color = 'black', fill = "gray10"), 
+          panel.background = element_rect(fill = 'gray60'), 
+          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 

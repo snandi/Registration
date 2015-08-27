@@ -8,7 +8,8 @@
 
 loadPackages <- function(CRANMirror=83){
   ## Choose USA (IA) as the CRAN mirror
-  chooseCRANmirror(graphics=F, ind=83)
+  Mirrors <- getCRANmirrors(all = FALSE, local.only = FALSE)
+  chooseCRANmirror(graphics = F, ind = which(Mirrors$Name == 'USA (IA)'))
   
   Packages <- c(
     'boot',
@@ -27,6 +28,7 @@ loadPackages <- function(CRANMirror=83){
     'gtools',
     'lattice',
     'mclust',
+    'png',
     'plyr',
     'reshape',
     'reshape2',
