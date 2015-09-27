@@ -3,7 +3,6 @@
 
 ## If the package does not exist, it installs them from CRAN Mirror IA (USA). 
 ## It returns a lit of all packages loaded and a list of all packages to be 
-
 ## loaded in case of parallel computation
 
 loadPackages <- function(CRANMirror=83){

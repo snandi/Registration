@@ -10,7 +10,9 @@
 # Ylabel = NULL
 # Xlabel = NULL
 
-plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
+plotbyCurve_regist_fda <- function(
+                                   registOutput,
+                                   TrueWarp = NULL,
                                    Lambda = NULL,
                                    Ylabel = NULL,
                                    Xlabel = NULL
@@ -181,7 +183,9 @@ plotbyCurve_regist_fda <- function(registOutput, TrueWarp = NULL,
 # Xlabel = NULL
 # This function currently prints the plots it generates. It should be wrapped inside a
 # pdf object call. 
-plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
+plotAll_regist_fda <- function(
+                               registOutput,
+                               TrueWarp = NULL,
                                Lambda = NULL,
                                TitleText = "",
                                Ylabel = NULL,
@@ -303,10 +307,10 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
       ylab(label = Ylabel) + 
 #    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-#           panel.background = element_rect(fill = 'black'), 
-#           plot.background = element_rect(color = 'black', fill = "gray10"), 
-          panel.background = element_rect(fill = 'gray60'), 
-          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
+          panel.background = element_rect(fill = 'black'), 
+          plot.background = element_rect(color = 'black', fill = "gray10"), 
+          ## panel.background = element_rect(fill = 'gray60'), 
+          ## plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 
@@ -337,10 +341,10 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
       xlab(label = Xlabel) +
       ylab(label = Ylabel) + 
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-          #           panel.background = element_rect(fill = 'black'), 
-          #           plot.background = element_rect(color = 'black', fill = "gray10"), 
-          panel.background = element_rect(fill = 'gray60'), 
-          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
+          panel.background = element_rect(fill = 'black'), 
+          plot.background = element_rect(color = 'black', fill = "gray10"), 
+          ## panel.background = element_rect(fill = 'gray60'), 
+          ## plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 
@@ -374,10 +378,10 @@ plotAll_regist_fda <- function(registOutput, TrueWarp = NULL,
     geom_abline(intercept = 0, slope = 1, col = 'white', size = 1) + 
     xlab(label = Xlabel) +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-          #           panel.background = element_rect(fill = 'black'), 
-          #           plot.background = element_rect(color = 'black', fill = "gray10"), 
-          panel.background = element_rect(fill = 'gray60'), 
-          plot.background = element_rect(color = 'gray60', fill = "gray60"), 
+          panel.background = element_rect(fill = 'black'), 
+          plot.background = element_rect(color = 'black', fill = "gray10"), 
+          ## panel.background = element_rect(fill = 'gray60'), 
+          ## plot.background = element_rect(color = 'gray60', fill = "gray60"), 
           axis.text = element_text(colour = "white", size = 10), 
           axis.title.x = element_text(colour = "white", size = 12), 
           axis.title.y = element_text(colour = "white", size = 12), 
