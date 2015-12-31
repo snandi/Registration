@@ -14,7 +14,7 @@ loadPackages <- function(CRANMirror=83){
     'boot',
     'car',
     'cluster',
-    'clusterSim',
+    #'clusterSim',
     'clValid',
     'doParallel',  ## For parallel execution with foreach
     'fda',
@@ -22,7 +22,7 @@ loadPackages <- function(CRANMirror=83){
     'fdasrvf',
     'foreach',
     'ggplot2',
-    'grid',
+    'gridBase',
     'gridExtra',
     'gtools',
     'lattice',
