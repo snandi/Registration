@@ -38,7 +38,7 @@ loadPackages <- function(CRANMirror=83){
   for(Package in Packages){
     if(require(package=Package, character.only=T) == F){
       print(paste('Installing', Package))
-      try(install.packages(Package, dependencies = TRUE))
+      #try(install.packages(Package, dependencies = TRUE))
     } else{
       print(paste('Loading', Package))
       require(package=Package, character.only=T)
