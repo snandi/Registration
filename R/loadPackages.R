@@ -14,9 +14,10 @@ loadPackages <- function(CRANMirror=83){
     'boot',
     'car',
     'cluster',
-    #'clusterSim',
+    'clusterSim',
     'clValid',
     'doParallel',  ## For parallel execution with foreach
+    'doSNOW',
     'fda',
     'fdakma',
     'fdasrvf',
@@ -33,7 +34,8 @@ loadPackages <- function(CRANMirror=83){
     'plyr',
     'reshape',
     'reshape2',
-    'robustX'   ## For multivariate median
+    'robustX',   ## For multivariate median
+    'rpart'
   )
 
   ## Requiring packages and installing them if something doesnt exist
