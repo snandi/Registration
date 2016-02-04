@@ -11,6 +11,7 @@ loadPackages <- function(CRANMirror=83){
   chooseCRANmirror(graphics = F, ind = which(Mirrors$Name == 'USA (IA)'))
   
   Packages <- c(
+    'Biostrings',  ## For sequence comparison
     'boot',
     'car',
     'cluster',
@@ -20,7 +21,7 @@ loadPackages <- function(CRANMirror=83){
     'doSNOW',
     'fda',
     'fdakma',
-    'fdasrvf',
+    #'fdasrvf',
     'fda.usc',     ## For functional data depth
     'foreach',
     'ggplot2',
@@ -29,13 +30,15 @@ loadPackages <- function(CRANMirror=83){
     'gtools',
     'lattice',
     'MASS',
+    'matrixStats', ## For weighted row means
     'mclust',
     'png',
     'plyr',
     'reshape',
     'reshape2',
     'robustX',   ## For multivariate median
-    'rpart'
+    'rpart',
+    'seqinr'
   )
 
   ## Requiring packages and installing them if something doesnt exist
