@@ -11,9 +11,19 @@
 # q = 0.05
 # returnPlot = TRUE
 
-permute_pointwiseT <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05,
-                               returnPlot = TRUE,
-                               TitleText = ''){
+require(fda)
+require(ggplot2)
+
+#'@export
+
+permute_pointwiseT <- function(
+  Mat1, 
+  Mat2, 
+  Nperm = 200, 
+  argvals, q = 0.05,
+  returnPlot = TRUE,
+  TitleText = ''
+){
   require(fda)
   require(ggplot2)
   ## This function returns: 
@@ -24,7 +34,8 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05,
   ## This functions requires two matrices of same number of rows, 
   ## each column being a separate curve; 
   ## GOAL: To establish, nonparametrically, by permutations if these two
-  ## groups of curves are statistically different
+  ## groups of curves are from the same distribution
+  
   if(nrow(Mat1) != nrow(Mat2)){
     stop("Both datasets should have same numbers of observations")
   }
@@ -80,7 +91,7 @@ permute_pointwiseT <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05,
   
   Ylim <- c(min(Tvals, qvals.pts) - 0.1, max(Tvals, qval) + 0.1)
   MainTitle <- paste('Pointwise T statistics for', Nperm, 'Permutations', '\n', TitleText)
-  if(returnPlot==TRUE){
+  if(returnPlot == TRUE){
     TPlot <- qplot(x=argvals, y=TValues, data=DataToPlot) + 
       ylim(Ylim) + 
       geom_point(aes(color=TValueType)) +
