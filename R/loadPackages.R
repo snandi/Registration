@@ -21,7 +21,7 @@ loadPackages <- function(CRANMirror=83){
     'doSNOW',
     'fda',
     'fdakma',
-    #'fdasrvf',
+    'fdasrvf',
     'fda.usc',     ## For functional data depth
     'foreach',
     'ggplot2',

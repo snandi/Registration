@@ -5,16 +5,17 @@
 # rangeobs = x1fd$basis$range
 # 
 # argvals = seq(rangeobs[1], rangeobs[2], length.out = 101)
-# Mat1 <-   eval.fd(evalarg=argvals, x1fd)
-# Mat2 <-   eval.fd(evalarg=argvals, x2fd)
+# Mat1 <-   eval.fd(evalarg = argvals, x1fd)
+# Mat2 <-   eval.fd(evalarg = argvals, x2fd)
 # 
 # q = 0.05
 # returnPlot = TRUE
 
-permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05, 
-                                  D1=TRUE){
+#'@export
+permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1 = TRUE){
   require(fda)
   require(fdakma)
+  require(ggplot2)
   
   ## This function returns: 
   ##                      overall similarity measure & p-value
@@ -24,7 +25,7 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05,
   ## groups of curves are statistically different. It estimates the similarity
   ## measure using kma.similarity, the default d1.pearson distance metric,
   ##
-  ## The matrices should be of the first derivatives of the curves
+  ## The matrices should be of the first derivatives of the curves, for d1.pearson
   
   if(nrow(Mat1) != nrow(Mat2)){
     stop("Both datasets should have same numbers of observations")
@@ -50,25 +51,25 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05,
     PermMat2 <- MatAll_Perm[, N1+(1:N2)]
     rm(MatAll_Perm)
     if(D1){
-      Dist_null[i] <- kma.similarity(x.f=argvals, y1.f=rowMeans(PermMat1), 
-                                     x.g=argvals, y1.g=rowMeans(PermMat2), 
-                                     similarity.method='d1.pearson')
+      Dist_null[i] <- kma.similarity(x.f = argvals, y1.f = rowMeans(PermMat1), 
+                                     x.g = argvals, y1.g = rowMeans(PermMat2), 
+                                     similarity.method = 'd1.pearson')
     } else{
-      Dist_null[i] <- kma.similarity(x.f=argvals, y0.f=rowMeans(PermMat1), 
-                                     x.g=argvals, y0.g=rowMeans(PermMat2), 
-                                     similarity.method='d0.pearson')
+      Dist_null[i] <- kma.similarity(x.f = argvals, y0.f = rowMeans(PermMat1), 
+                                     x.g = argvals, y0.g = rowMeans(PermMat2), 
+                                     similarity.method = 'd0.pearson')
     }
   }
 
   ## Statistics for observed data
   if(D1){
-    Dist_Obs <- fdakma::kma.similarity(x.f=argvals, y1.f=rowMeans(Mat1), 
-                                       x.g=argvals, y1.g=rowMeans(Mat2), 
-                                       similarity.method='d1.pearson')
+    Dist_Obs <- fdakma::kma.similarity(x.f = argvals, y1.f = rowMeans(Mat1), 
+                                       x.g = argvals, y1.g = rowMeans(Mat2), 
+                                       similarity.method = 'd1.pearson')
   } else{
-    Dist_Obs <- fdakma::kma.similarity(x.f=argvals, y0.f=rowMeans(Mat1), 
-                                       x.g=argvals, y0.g=rowMeans(Mat2), 
-                                       similarity.method='d0.pearson')
+    Dist_Obs <- fdakma::kma.similarity(x.f = argvals, y0.f = rowMeans(Mat1), 
+                                       x.g = argvals, y0.g = rowMeans(Mat2), 
+                                       similarity.method = 'd0.pearson')
   }
   
   pval <- mean(Dist_Obs > Dist_null)  
@@ -94,14 +95,14 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm=20000, argvals, q=0.05,
   Xlab <- expression(paste('Null distribution of similarity index,          [Reject when ', T[obs], ' < ', T[crit], ' ]'))
   Binwidth <- min(0.01, diff(Xlim)/30)
 
-  Plot_pval <- qplot() + geom_histogram(aes(Dist_null), fill=Color, binwidth=Binwidth, color=Color) + 
+  Plot_pval <- qplot() + geom_histogram(aes(Dist_null), fill = Color, binwidth = Binwidth, color = Color) + 
     xlim(Xlim) + 
-    geom_vline(xintercept=Dist_Obs, colour='orangered', size=1) +
-    geom_vline(xintercept=qval, colour='gray10', size=1) +
-    annotate(geom='text', x=Dist_Obs, y=Inf, vjust=2, label='Obs', col='orangered') + 
-    annotate(geom='text', x=qval, y=Inf, vjust=4, label='Crit', col='gray10') +
-    ggtitle(Maintitle) + xlab(label=Xlab)
+    geom_vline(xintercept = Dist_Obs, colour = 'orangered', size = 1) +
+    geom_vline(xintercept = qval, colour = 'gray10', size = 1) +
+    annotate(geom = 'text', x = Dist_Obs, y = Inf, vjust = 2, label = 'Obs', col = 'orangered') + 
+    annotate(geom = 'text', x = qval, y = Inf, vjust = 4, label = 'Crit', col = 'gray10') +
+    ggtitle(Maintitle) + xlab(label = Xlab)
 
   return(list(pval = pval, qval = qval, Dist_Obs = Dist_Obs, Dist_null = Dist_null, 
-              Plot_pval=Plot_pval))
+              Plot_pval = Plot_pval))
 }
