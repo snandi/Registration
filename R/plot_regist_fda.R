@@ -9,6 +9,14 @@
 # Lambda = NULL
 # Ylabel = NULL
 # Xlabel = NULL
+#'@import fda
+#'@import gridExtra
+#'@import ggplot2
+#'@import fdasrvf
+
+# require(ggplot2)
+# require(gridExtra)
+# require(fdasrvf)
 
 plotbyCurve_regist_fda <- function(
                                    registOutput,

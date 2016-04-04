@@ -10,9 +10,9 @@
 # 
 # q = 0.05
 # returnPlot = TRUE
-
-require(fda)
-require(ggplot2)
+#'@import fda
+#'@import fdakma
+#'@import ggplot2
 
 #'@export
 
@@ -24,8 +24,6 @@ permute_pointwiseT <- function(
   returnPlot = TRUE,
   TitleText = ''
 ){
-  require(fda)
-  require(ggplot2)
   ## This function returns: 
   ##                      pointwise T statistic values, p-values
   ##                      overall T value & p-value

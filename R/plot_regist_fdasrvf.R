@@ -5,15 +5,18 @@
 # Xlabel=NULL
 # time=Age[-1]
 
+#'@import fda
+#'@import gridExtra
+#'@import ggplot2
+#'@import fdasrvf
+#'@import reshape2
+
 plotbyCurve_regist_fdasrv <- function(registOutput, TrueWarp=NULL, 
                                       time=Age[-1], 
                                       Lambda=NULL,
                                       Ylabel=NULL,
                                       Xlabel=NULL
 ) {
-  require(ggplot2)
-  require(gridExtra)
-  require(reshape2)
   # plots the output of registration function time_warping, one curve at a time
   #
   # Argument:

@@ -10,13 +10,13 @@
 # 
 # q = 0.05
 # returnPlot = TRUE
+#'@import fda
+#'@import fdakma
+#'@import ggplot2
 
 #'@export
 permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1 = TRUE){
-  require(fda)
-  require(fdakma)
-  require(ggplot2)
-  
+
   ## This function returns: 
   ##                      overall similarity measure & p-value
   ## This functions requires two matrices of same number of rows, 
