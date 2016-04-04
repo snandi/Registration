@@ -16,6 +16,11 @@ Imports:
     fdasrvf,
     ggplot2,
     gridExtra,
-    reshape2
+    kSamples,
+    MASS,
+    mgcv,
+    refund,
+    reshape2,
+    RFunctionsSN
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1

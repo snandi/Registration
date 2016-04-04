@@ -152,9 +152,9 @@ plotAll_regist_fdasrv <- function(registOutput, TrueWarp=NULL, time,
                                   Ylabel=NULL,
                                   Xlabel=NULL
 ) {
-  require(ggplot2)
-  require(gridExtra)
-  require(reshape2)
+#   require(ggplot2)
+#   require(gridExtra)
+#   require(reshape2)
   # plots the output of registration function time_warping, one curve at a time
   #
   # Argument:

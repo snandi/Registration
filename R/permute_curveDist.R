@@ -13,7 +13,8 @@
 #'@import fda
 #'@import fdakma
 #'@import ggplot2
-
+#'@import RFunctionsSN
+#'
 #'@export
 permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1 = TRUE){
 

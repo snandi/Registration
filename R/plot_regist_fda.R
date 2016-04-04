@@ -25,9 +25,9 @@ plotbyCurve_regist_fda <- function(
                                    Ylabel = NULL,
                                    Xlabel = NULL
 ) {
-  require(ggplot2)
-  require(gridExtra)
-  require(fdasrvf)
+#   require(ggplot2)
+#   require(gridExtra)
+#   require(fdasrvf)
   #  plots the output of registration function register.fd, one curve at a time
   #
   #  Argument:
@@ -203,9 +203,9 @@ plotAll_regist_fda <- function(
                                Xarg_fine = NULL,
                                saveToPDF = FALSE
 ) {
-  require(ggplot2)
-  require(gridExtra)
-  require(reshape2)
+#   require(ggplot2)
+#   require(gridExtra)
+#   require(reshape2)
   #  plots the output of registration function register.fd, one curve at a time
   #
   #  Argument:
