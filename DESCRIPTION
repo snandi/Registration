@@ -13,10 +13,9 @@ Depends:
 Imports:
     fda,
     fdakma,
-    fdasrvf,
     ggplot2,
     gridExtra,
-    kSamples,
+    adk,
     MASS,
     mgcv,
     refund,

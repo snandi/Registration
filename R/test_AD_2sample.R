@@ -6,7 +6,7 @@
 ###########################################################################################################
 #require( adk )
 
-#'@import kSamples 
+#'@import adk 
 #'@export
 
 test_AD_2sample <- function( datX, datY, p ){ 

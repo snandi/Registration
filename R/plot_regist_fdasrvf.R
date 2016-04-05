@@ -8,7 +8,7 @@
 #'@import fda
 #'@import gridExtra
 #'@import ggplot2
-#'@import fdasrvf
+#@import fdasrvf
 #'@import reshape2
 
 plotbyCurve_regist_fdasrv <- function(registOutput, TrueWarp=NULL, 
