@@ -39,7 +39,7 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1
   # q <- 1 - q    ## Not needed
   N1 <- ncol(Mat1)
   N2 <- ncol(Mat2)
-  print(paste(N1, N2))
+  # print(paste(N1, N2))
   MatAll <- cbind(Mat1, Mat2)
   
   Dist_null <- rep(0, Nperm)
@@ -85,12 +85,12 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1
     XMax <- max(Dist_null)
     Xlim <- range(Dist_null)
   } else{
-    print('Using this one')
+    ## print('Using this one')
     XMin <- min(Dist_null, Dist_Obs)
     XMax <- max(Dist_null, Dist_Obs)
     RangeDiff <- diff(range(Dist_null))/10    
     Xlim <- c(XMin - RangeDiff, XMax + RangeDiff)
-    print(Xlim)
+    ## print(Xlim)
   }
   
   Xlab <- expression(paste('Null distribution of similarity index,          [Reject when ', T[obs], ' < ', T[crit], ' ]'))
