@@ -135,13 +135,22 @@ FPCA_covsmooth_fpcasc <- function(Y.1, Y.2, threshold = 0.99){
 #c <- FPCA_covsmooth$Phi.U_eigenfn%*%diag(FPCA_covsmooth$eigenvals)%*%t(FPCA_covsmooth$Phi.U_eigenfn)+(FPCA_covsmooth$sigma.noise%*%diag(rep(1,dim(FPCA_covsmooth$Phi.U_eigenfn)[1])))
 
 #To debug: 
-x <- rnorm(2000,0,3)
-y <- rnorm(2000,0,4)
-d1 <- matrix(x,20,100)
-d2 <- matrix(y,20,100)
-cd1 <- cov(d1)
-cd2 <- cov(d2)
-n.1 <- dim(d1)[1]
-n.2 <- dim(d2)[1]
-test <- FPCA_covsmooth_fpcasc(cd1,cd2, threshold = 0.96)
+# x <- rnorm(2000,0,3)
+# y <- rnorm(2000,0,4)
+# d1 <- matrix(x,20,100)
+# d2 <- matrix(y,20,100)
+# cd1 <- cov(d1)
+# cd2 <- cov(d2)
+# n.1 <- dim(d1)[1]
+# n.2 <- dim(d2)[1]
+# test <- FPCA_covsmooth_fpcasc(cd1,cd2, threshold = 0.96)
 
+matplot(cd1, type = 'l')
+matplot(cd2, type = 'l')
+
+fpca.Y1 <- fpca.sc(Y = cd1, pve = .999999, var = TRUE)
+fpca.Y2 <- fpca.sc(Y.2, pve = .99, var = TRUE)
+
+library(ggplot2)
+library(reshape2)
+data(cd4)

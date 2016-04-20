@@ -34,3 +34,11 @@ test_AD_2sample <- function( datX, datY, p ){
   list( pval = pvalvec )
 }
 
+x <- list(c(1,3,2,5,7),c(2,8,1,6,9,4),c(12,5,7,9,11))
+out <- adk.test(x) 
+# or out <- adk.test(c(1,3,2,5,7),c(2,8,1,6,9,4), c(12,5,7,9,11))
+## Examine the component names of out
+names(out)
+
+## Examine the matrix adk of out.
+out$adk

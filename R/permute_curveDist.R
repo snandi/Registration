@@ -104,6 +104,12 @@ permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1
     annotate(geom = 'text', x = qval, y = Inf, vjust = 4, label = 'Crit', col = 'gray10') +
     ggtitle(Maintitle) + xlab(label = Xlab)
 
-  return(list(pval = pval, qval = qval, Dist_Obs = Dist_Obs, Dist_null = Dist_null, 
-              Plot_pval = Plot_pval))
+  return(list(
+    pval      = pval, 
+    qval      = qval, 
+    Dist_Obs  = Dist_Obs, 
+    Dist_null = Dist_null, 
+    Plot_pval = Plot_pval
+    )
+  )
 }
