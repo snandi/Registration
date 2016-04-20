@@ -145,12 +145,12 @@ FPCA_covsmooth_fpcasc <- function(Y.1, Y.2, threshold = 0.99){
 # n.2 <- dim(d2)[1]
 # test <- FPCA_covsmooth_fpcasc(cd1,cd2, threshold = 0.96)
 
-matplot(cd1, type = 'l')
-matplot(cd2, type = 'l')
-
-fpca.Y1 <- fpca.sc(Y = cd1, pve = .999999, var = TRUE)
-fpca.Y2 <- fpca.sc(Y.2, pve = .99, var = TRUE)
-
-library(ggplot2)
-library(reshape2)
-data(cd4)
+# matplot(cd1, type = 'l')
+# matplot(cd2, type = 'l')
+# 
+# fpca.Y1 <- fpca.sc(Y = cd1, pve = .999999, var = TRUE)
+# fpca.Y2 <- fpca.sc(Y.2, pve = .99, var = TRUE)
+# 
+# library(ggplot2)
+# library(reshape2)
+# data(cd4)

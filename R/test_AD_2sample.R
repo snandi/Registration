@@ -20,25 +20,36 @@ test_AD_2sample <- function( datX, datY, p ){
   if( is.vector( U ) == T || is.vector( V ) == T ){ p = 1 }
   if( is.vector( U ) == F && is.vector( V ) == F ){ p = min( dim( U )[2],dim( V )[2] ) }
   #p=min( dim( U )[2],dim( V )[2] )   
-  pvalvec <- rep( NA,p )
+  pvaluec <- rep( x = NA, times = p )
+  testStat <- rep( x = NA, times = p )
   
-  
-  if( p == 1 ){ k=1; pvalvec[k] <- adk.test( U,V )$adk[1,2] }
+  if( p == 1 ){ 
+    k = 1
+    testOutput <- adk.test( U, V )
+    pvaluec[k] <- testOutput$adk[1,2]
+    testStat[k] <- testOutput$adk[1,1]
+  }
   if( p > 1 ){ 
     for( k in 1:p ){ 
       #get the p value from the anderson darling test
-      pvalvec[k] <- adk.test( U[,k],V[,k] )$adk[1,2] 
+      testOutput <- adk.test( U[,k], V[,k] )
+      pvaluec[k] <- testOutput$adk[1,2] 
+      testStat[k] <- testOutput$adk[1,1]
+      rm( testOutput )
     }
   }
-  #now return the pvalue vector
-  list( pval = pvalvec )
+  #now return the pvalue vector and the test statistic vector
+  return(list( pval = pvaluec, testStat = testStat ))
 }
 
-x <- list(c(1,3,2,5,7),c(2,8,1,6,9,4),c(12,5,7,9,11))
-out <- adk.test(x) 
-# or out <- adk.test(c(1,3,2,5,7),c(2,8,1,6,9,4), c(12,5,7,9,11))
-## Examine the component names of out
-names(out)
+# U1 <- rnorm(n = 20, mean = 2, sd = 1)
+# U2 <- rnorm(n = 20, mean = 1, sd = 2)
+# 
+# V1 <- rnorm(n = 20, mean = 0, sd = 1)
+# V2 <- rnorm(n = 20, mean = 1, sd = 2)
+# 
+# Mat1 <- cbind(U1, U2)
+# Mat2 <- cbind(V1, V2)
+# testOutput <- test_AD_2sample( datX = Mat1, datY = Mat2, p = 2 )
 
-## Examine the matrix adk of out.
-out$adk
+  
