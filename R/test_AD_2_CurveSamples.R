@@ -30,8 +30,8 @@ test_AD_2_CurveSamples <- function( Mat1, Mat2, varpct = 0.95 ){
 
   FPCA.out <- fpca.sc(Y = t(Data_Combined), var = TRUE, pve = varpct)
   
-  scores1 <- FPCA.out[1:n1,]
-  scores2 <- FPCA.out[(n1 + 1):(n1 + n2),]  
+  scores1 <- FPCA.out$scores[1:n1,]
+  scores2 <- FPCA.out$scores[(n1 + 1):(n1 + n2),]  
   ncomp <- dim(FPCA.out$efunctions)[2]
   
   testOutput <- test_AD_2sample( datX = scores1, datY = scores2, p = ncomp)
@@ -39,3 +39,12 @@ test_AD_2_CurveSamples <- function( Mat1, Mat2, varpct = 0.95 ){
 	
 }
   
+# require(fda)
+# require(mgcv)
+# require(adk)
+# require(refund)
+# data(growth)
+# Mat1 <- growth[['hgtm']]
+# Mat2 <- growth[['hgtf']]
+# testOutput <- test_AD_2_CurveSamples(Mat1 = Mat1, Mat2 = Mat2, varpct = 0.95)
+
