@@ -116,7 +116,34 @@ permute_pointwiseT <- function(
     annotate(geom='text', x=qval, y=Inf, vjust=4, label='Crit', col='gray10') +
     ggtitle(Maintitle) + xlab(label=Xlab)
   
-  return(list(pval = pval, qval = qval, Tobs = Tobs, Tnull = Tnull, 
-              Tvals = Tvals, Tnullvals = Tnullvals, qvals.pts = qvals.pts, 
-              pvals.pts = pvals.pts, TPlot=TPlot, Plot_pval=Plot_pval))
+  return(list(
+    pval      = pval, 
+    qval      = qval, 
+    Tobs      = Tobs, 
+    Tnull     = Tnull, 
+    Tvals     = Tvals, 
+    Tnullvals = Tnullvals, 
+    qvals.pts = qvals.pts, 
+    pvals.pts = pvals.pts, 
+    TPlot     = TPlot, 
+    Plot_pval = Plot_pval
+  ))
 }
+################## For debugging ##################
+# require(fda)
+# require(ggplot2)
+# data(growth)
+# Mat1 <- growth[['hgtm']]
+# Mat2 <- growth[['hgtf']]
+# Arguments <- growth[['age']]
+# PermTestResults <- permute_pointwiseT(
+#   Mat1 = Mat1, 
+#   Mat2 = Mat2, 
+#   Nperm = 200,
+#   argvals = Arguments,
+#   q = 0.05,
+#   returnPlot = TRUE,
+#   TitleText = 'Growths of boys and girls (Berkeley growth data)'
+# )
+# names(PermTestResults)
+##################################################

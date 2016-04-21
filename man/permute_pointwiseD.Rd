@@ -1,16 +1,17 @@
-\name{permute_kmaSimilarity}
-\alias{permute_kmaSimilarity}
+\name{permute_pointwiseD}
+\alias{permute_pointwiseD}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Permutation test between two sets of curves
+Permutation test between two sets of curves, with max pointwise difference
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Permutation test between two sets of curves using similarity index
+Permutation test between two sets of curves, with max pointwise difference
 }
 \usage{
-permute_kmaSimilarity(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1 = TRUE)
+permute_pointwiseD(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, 
+                   returnPlot = TRUE, TitleText = "")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,19 +35,32 @@ The abscissa, the x-axis or the time-axis. The length of this should be the same
 %%     ~~Describe \code{q} here~~
 0.05 or an appropriate \eqn{\alpha} level 
 }
-  \item{D1}{
-%%     ~~Describe \code{D1} here~~
-\code{TRUE/FALSE} whether the matrix contains the curves of derivatives of the curves. \code{TRUE} if contains derivatives.
+  \item{returnPlot}{
+%%     ~~Describe \code{returnPlot} here~~
+Whether to return the permutation distribution plot
+}
+  \item{TitleText}{
+%%     ~~Describe \code{TitleText} here~~
+A text intended to be appended to ggtitle
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
+This is the permutation test, testing the hypothesis \eqn{H_0: F_{Y_1} = F_{Y_2}}
 }
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  \item{pval }{p-value of the permutation test}
+  \item{qval }{q-value of the permutation test}
+  \item{Dobs }{Observed value of the test statistic}
+  \item{Dvals }{Observed pointwise values of D, along the argvals }
+  \item{Dnull }{Null distribution of the test statistic}
+  \item{Dnullvals }{Observed pointwise values of D, along the argvals, for all permutations}
+  \item{qvals.pts }{Pointwise q-value, along the argvals}
+  \item{pvals.pts }{Pointwise p-value, along the argvals}
+  \item{DPlot }{Plot of Dobs in the Dnull distribution}
+  \item{Plot_pval }{Plot of pointwise p-values, along the argvals}
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -57,29 +71,30 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 }
 \note{
 %%  ~~further notes~~
-This is an extension of the function fdakma::kma.similarity. This is using \eqn{\rho} to test similarity between two sets of curves.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-fdakma::kma.similarity
+permute_pointwiseT
 }
 \examples{
 require(fda)
-require(fdakma)
 require(ggplot2)
+%require(Registration)
 data(growth)
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 Arguments <- growth[['age']]
-PermTestResults <- permute_kmaSimilarity(
+PermTestResults <- permute_pointwiseD(
   Mat1 = Mat1, 
   Mat2 = Mat2, 
   Nperm = 200,
   argvals = Arguments,
-  q = 0.05
+  q = 0.05,
+  returnPlot = TRUE,
+  TitleText = 'Growths of boys and girls (Berkeley growth data)'
 )
 names(PermTestResults)
 }
@@ -87,4 +102,4 @@ names(PermTestResults)
 % R documentation directory.
 \keyword{ permutation }
 \keyword{ testing }
-\keyword{ similarity }% __ONLY ONE__ keyword per line
+\keyword{ curves }% __ONLY ONE__ keyword per line

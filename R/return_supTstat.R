@@ -12,8 +12,8 @@ return_supTstat <- function(Mat1, Mat2){
   
   mean1 <- rowMeans(Mat1)
   mean2 <- rowMeans(Mat2)
-  var1 <- apply(X=Mat1, MARGIN=1, FUN=var)/N1
-  var2 <- apply(X=Mat2, MARGIN=1, FUN=var)/N2
+  var1 <- apply(X = Mat1, MARGIN = 1, FUN = var)/N1
+  var2 <- apply(X = Mat2, MARGIN = 1, FUN = var)/N2
   
   Tvals <- abs(mean1 - mean2)/sqrt(var1 + var2)
   TSup <- max(Tvals)

@@ -51,8 +51,16 @@ This is the permutation test, testing the hypothesis \eqn{H_0: F_{Y_1} = F_{Y_2}
 \value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
+  \item{pval }{p-value of the permutation test}
+  \item{qval }{q-value of the permutation test}
+  \item{Tobs }{Observed value of the test statistic}
+  \item{Tvals }{Observed pointwise values of T, along the argvals }
+  \item{Tnull }{Null distribution of the test statistic}
+  \item{Tnullvals }{Observed pointwise values of T, along the argvals, for all permutations}
+  \item{qvals.pts }{Pointwise q-value, along the argvals}
+  \item{pvals.pts }{Pointwise p-value, along the argvals}
+  \item{TPlot }{Plot of Tobs in the Tnull distribution}
+  \item{Plot_pval }{Plot of pointwise p-values, along the argvals}
 %% ...
 }
 \references{
