@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Rreturns the score estimates of covariance function for 2-sample testing
+Returns the score estimates of covariance function for 2-sample testing
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

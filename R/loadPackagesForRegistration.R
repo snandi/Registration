@@ -1,16 +1,18 @@
 ## This function loads all the require packages for functions in this R Package
 ## Registration. 
 
-## If the package does not exist, it installs them from CRAN Mirror IA (USA). 
+## If the package does not exist, it installs them from CRAN Mirror IA ( USA ). 
 ## It returns a lit of all packages loaded and a list of all packages to be 
 ## loaded in case of parallel computation
 
-loadPackages <- function(CRANMirror=83){
-  ## Choose USA (IA) as the CRAN mirror
-  Mirrors <- getCRANmirrors(all = FALSE, local.only = FALSE)
-  chooseCRANmirror(graphics = F, ind = which(Mirrors$Name == 'USA (IA)'))
+#'@export 
+
+loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE ){
+  ## Choose USA ( IA ) as the CRAN mirror
+  Mirrors <- getCRANmirrors( all = FALSE, local.only = FALSE )
+  chooseCRANmirror( graphics = F, ind = which( Mirrors$Name == 'USA(IA)' ) )
   
-  Packages <- c(
+  Packages <- c( 
     'Biostrings',  ## For sequence comparison
     'boot',
     'car',
@@ -32,6 +34,7 @@ loadPackages <- function(CRANMirror=83){
     'MASS',
     'matrixStats', ## For weighted row means
     'mclust',
+    'parallel',
     'png',
     'plyr',
     'reshape',
@@ -39,21 +42,27 @@ loadPackages <- function(CRANMirror=83){
     'robustX',   ## For multivariate median
     'rpart',
     'seqinr'
-  )
+   )
 
   ## Requiring packages and installing them if something doesnt exist
-  for(Package in Packages){
-    if(require(package=Package, character.only=T) == F){
-      print(paste('Installing', Package))
-      #try(install.packages(Package, dependencies = TRUE))
+  for( Package in Packages ){
+    if( require( package = Package, character.only = T ) == F ){
+      if( tryToInstall ){
+        print( paste( 'Installing', Package ) )
+        try( install.packages( Package, dependencies = TRUE ) )
+      } else{
+        print( paste( 'Please install', Package ) )
+      }
     } else{
-      print(paste('Loading', Package))
-      require(package=Package, character.only=T)
+      print( paste( 'Loading', Package ) )
+      require( package = Package, character.only = T )
     }
   }
 
   ## For parallel processing, when passing the list of packages to load
   ## in all the cores. Could be different from Packages
   Packages_Par <- Packages
-  return(list(Packages=Packages, Packages_Par=Packages_Par))
+  
+  PackageList <- list( Packages = Packages, Packages_Par = Packages_Par )
+  return( PackageList )
 }
