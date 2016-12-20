@@ -8,9 +8,6 @@
 #'@export 
 
 loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE ){
-  ## Choose USA ( IA ) as the CRAN mirror
-  Mirrors <- getCRANmirrors( all = FALSE, local.only = FALSE )
-  chooseCRANmirror( graphics = F, ind = which( Mirrors$Name == 'USA(IA)' ) )
   
   Packages <- c( 
     'Biostrings',  ## For sequence comparison
@@ -21,6 +18,7 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'clValid',
     'doParallel',  ## For parallel execution with foreach
     'doSNOW',
+    'dplyr',
     'fda',
     'fdakma',
     'fdasrvf',
@@ -32,22 +30,29 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'gtools',
     'lattice',
     'MASS',
+    'Matrix',
     'matrixStats', ## For weighted row means
     'mclust',
     'parallel',
     'png',
     'plyr',
+    'randomForest',
     'reshape',
     'reshape2',
     'robustX',   ## For multivariate median
     'rpart',
-    'seqinr'
+    'seqinr',
+    'utils'
    )
 
   ## Requiring packages and installing them if something doesnt exist
   for( Package in Packages ){
     if( require( package = Package, character.only = T ) == F ){
       if( tryToInstall ){
+        ## Choose USA ( IA ) as the CRAN mirror
+        Mirrors <- getCRANmirrors( all = FALSE, local.only = FALSE )
+        chooseCRANmirror( graphics = F, ind = which( Mirrors$Name == 'USA (IA)' ) )
+        
         print( paste( 'Installing', Package ) )
         try( install.packages( Package, dependencies = TRUE ) )
       } else{

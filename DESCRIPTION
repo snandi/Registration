@@ -11,6 +11,7 @@ Description: Contains functions for iterated, constrained registration, and
 Depends:
     R (>= 3.1)
 Imports:
+    dplyr,
     fda,
     fdakma,
     ggplot2,
@@ -18,7 +19,9 @@ Imports:
     adk,
     MASS,
     mgcv,
+    plyr,
     refund,
+    randomForest, 
     reshape2,
     RFunctionsSN
 License: The MIT License (MIT)
