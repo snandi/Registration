@@ -11,14 +11,19 @@ Description: Contains functions for iterated, constrained registration, and
 Depends:
     R (>= 3.1)
 Imports:
+    doParallel,
     dplyr,
     fda,
     fdakma,
+    foreach,
+    gbm,
     ggplot2,
     gridExtra,
     adk,
     MASS,
+    Metrics,
     mgcv,
+    parallel,
     plyr,
     refund,
     randomForest, 

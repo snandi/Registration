@@ -21,9 +21,10 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'dplyr',
     'fda',
     'fdakma',
-    'fdasrvf',
+    # 'fdasrvf',
     'fda.usc',     ## For functional data depth
     'foreach',
+    'gbm',         ## For gradient boosting
     'ggplot2',
     'gridBase',
     'gridExtra',
@@ -33,12 +34,14 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'Matrix',
     'matrixStats', ## For weighted row means
     'mclust',
+    'Metrics',     ## For estimating model metrics
     'parallel',
     'png',
     'plyr',
     'randomForest',
     'reshape',
     'reshape2',
+    'RFunctionsSN', 
     'robustX',   ## For multivariate median
     'rpart',
     'seqinr',
