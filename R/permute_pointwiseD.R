@@ -68,7 +68,7 @@ permute_pointwiseD <- function(
     DValueType <- factor(DValueType)
   })
   
-  Ylim <- c(min(Dvals, qvals.pts) - 0.1, max(Dvals, qval) + 0.1)
+  Ylim <- c(min(Dvals, qvals.pts) - 0.05, max(Dvals, qval) + 0.05 )
   MainTitle <- paste('Pointwise D statistics for', Nperm, 'Permutations', '\n', TitleText)
   if(returnPlot == TRUE){
     DPlot <- qplot(x = argvals, y = DValues, data = DataToPlot) + 
@@ -86,8 +86,8 @@ permute_pointwiseD <- function(
   Maintitle <- paste('Permutation test, with D (abs diff),', Nperm, 'iterations, p-value', pval,
                      '\n', TitleText)
   Color <- 'royalblue1' # 'turquoise2'
-  Binwidth <- round( diff( range( Dnull ) )/30, 1 )
-  Xlim <- c( min( Dnull, Dobs )*0.999, max( Dnull, Dobs, 1 )*1.001 )
+  Binwidth <- diff( range( Dnull ) )/30
+  Xlim <- c( min( Dnull, Dobs )*0.999, max( Dnull, Dobs )*1.001 )
   Xlab <- expression(paste('Null distribution of D (abs diff),         [ Reject when ', D[obs], ' > ', D[crit], ' ]'))
   Plot_pval <- qplot() + geom_histogram(aes( Dnull ), fill = Color, binwidth = Binwidth, color = Color) + 
     xlim( Xlim ) + 
