@@ -39,6 +39,7 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'png',
     'plyr',
     'randomForest',
+    'refund', 
     'reshape',
     'reshape2',
     'RFunctionsSN', 
