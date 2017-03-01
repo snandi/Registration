@@ -78,7 +78,7 @@ registerSingleIter <- function(
   return( list( 
     dataToRegister      = dataToRegister, 
     Regfd_Final         = Regfd_Final,
-    registeredCurves    = registeredCurves + 1, 
+    registeredCurves    = registeredCurves, 
     registeredCurves.D1 = registeredCurves.D1
   ) ) 
 }

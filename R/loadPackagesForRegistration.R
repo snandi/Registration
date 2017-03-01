@@ -4,42 +4,6 @@
 ## If the package does not exist, it installs them from CRAN Mirror IA ( USA ). 
 ## It returns a lit of all packages loaded and a list of all packages to be 
 ## loaded in case of parallel computation
-#'@import Biostrings
-#'@import boot
-#'@import car
-#'@import cluster
-#'@import clusterSim
-#'@import clValid
-#'@import doParallel
-#'@import doSNOW
-#'@import dplyr
-#'@import fda
-#'@import fdakma
-#'@import fda.usc
-#'@import foreach
-#'@import gbm
-#'@import ggplot2
-#'@import gridBase
-#'@import gridExtra
-#'@import gtools
-#'@import lattice
-#'@import MASS
-#'@import Matrix
-#'@import matrixStats
-#'@import mclust
-#'@import Metrics
-#'@import parallel
-#'@import png
-#'@import plyr
-#'@import randomForest
-#'@import refund
-#'@import reshape
-#'@import reshape2
-#'@import RFunctionsSN 
-#'@import robustX
-#'@import rpart
-#'@import seqinr
-#'@import utils
 
 #'@export 
 
