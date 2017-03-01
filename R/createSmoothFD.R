@@ -14,10 +14,11 @@ createSmoothFD <- function(
   pbasis         = NULL
  ){
   
-  if( ncol( curvesToSmooth ) > 1 ){
-    stopifnot( length( abscissa ) != nrow( curvesToSmooth ) )
+  curvesToSmoothMat <- cbind( curvesToSmooth )
+  if( ncol( curvesToSmoothMat ) > 1 ){
+    stopifnot( length( abscissa ) == nrow( curvesToSmoothMat ) )
   } else{
-    stopifnot( length( abscissa ) != length( curvesToSmooth ) )
+    stopifnot( length( abscissa ) == length( curvesToSmoothMat ) )
   }
   
   basisLength <- length( abscissa )/basisBreakFreq
