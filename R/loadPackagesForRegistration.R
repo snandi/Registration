@@ -5,6 +5,10 @@
 ## It returns a lit of all packages loaded and a list of all packages to be 
 ## loaded in case of parallel computation
 
+#'@import Biostrings
+#'@import car
+#'@import cluster
+
 #'@export 
 
 loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE ){

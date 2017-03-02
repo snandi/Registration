@@ -28,7 +28,11 @@ registerSingleIter <- function(
     pbasis         = NULL
   )$curvesSmooth
 
-  Sim_toMedian <- c( ) ## Contains the similarities of all curves to their median
+  Index <- 0
+  
+  Iterate <- TRUE
+  Regist_Objects <- vector(mode = 'list', length = 10)
+  Sim_toMedian <- c() ## Contains the similarities of all curves to their median
   
   if( !( is.na( Lambda_ConstrainedWarping ) ) ){
     Lambda <- Lambda_ConstrainedWarping
