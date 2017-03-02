@@ -10,7 +10,13 @@ To get kma.similarity for a matrix of curves with a template curve
 To use kma.similarity from fdakma package, for a matrix of curves with a template curve and return a vector of \code{similarity}
 }
 \usage{
-getKmaSimilarityWithTemplate(Mat, Template, Xaxis, similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered"), Deriv = FALSE)
+getKmaSimilarityWithTemplate(
+  Mat, 
+  Template, 
+  Xaxis, 
+  similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered"), 
+  Deriv = FALSE
+)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

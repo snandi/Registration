@@ -56,6 +56,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 \examples{
 require( fda )
 require( fdakma )
+require( robustX )
 data( growth )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]

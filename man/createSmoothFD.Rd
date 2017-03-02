@@ -10,7 +10,14 @@ Create a smooth functional data object using bsplines
 For a curve of a matrix this function creates a smooth functional data object as per the definition in R package fda, using bspline basis. 
 }
 \usage{
-createSmoothFD(curvesToSmooth, abscissa, lambdas = exp(-5:5), basisBreakFreq = 3, basisOrder = 4, pbasis = NULL)
+createSmoothFD(
+  curvesToSmooth, 
+  abscissa, 
+  lambdas = exp(-5:5), 
+  basisBreakFreq = 3, 
+  basisOrder = 4, 
+  pbasis = NULL
+)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
