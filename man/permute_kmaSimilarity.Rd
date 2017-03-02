@@ -50,6 +50,9 @@ The abscissa, the x-axis or the time-axis. The length of this should be the same
 }
 \references{
 %% ~put references to the literature/web site here ~
+Parodi, A., et al. "fdakma: Functional data analysis: K-mean alignment." R package version 1.1 (2014).
+
+https://cran.r-project.org/web/packages/fdakma/index.html
 }
 \author{
 %%  ~~who you are~~

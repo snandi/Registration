@@ -2,7 +2,7 @@ Package: Registration
 Type: Package
 Title: Contains functions for registration algorithms, simulation and testing
 Version: 1.1
-Date: 2015-06-29
+Date: 2017-03-03
 Author: Subhrangshu Nandi
 Maintainer: Subhrangshu Nandi <snandi@wisc.edu>
 Description: Contains functions for iterated, constrained registration, and
@@ -17,6 +17,7 @@ Imports:
     doParallel,
     dplyr,
     fda,
+    fda.usc,
     fdakma,
     foreach,
     gbm,
@@ -24,6 +25,7 @@ Imports:
     gridExtra,
     adk,
     MASS,
+    matrixStats,
     Metrics,
     mgcv,
     parallel,
@@ -31,6 +33,7 @@ Imports:
     refund,
     randomForest, 
     reshape2,
-    RFunctionsSN
+    RFunctionsSN,
+    robustX
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1
