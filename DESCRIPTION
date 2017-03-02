@@ -1,7 +1,7 @@
 Package: Registration
 Type: Package
 Title: Contains functions for registration algorithms, simulation and testing
-Version: 1.0
+Version: 1.1
 Date: 2015-06-29
 Author: Subhrangshu Nandi
 Maintainer: Subhrangshu Nandi <snandi@wisc.edu>
@@ -11,6 +11,9 @@ Description: Contains functions for iterated, constrained registration, and
 Depends:
     R (>= 3.1)
 Imports:
+    Biostrings,
+    car,
+    cluster,
     doParallel,
     dplyr,
     fda,
