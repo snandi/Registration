@@ -18,7 +18,8 @@ registerIterated <- function(
   outlierTrimPct = 0.20,
   RE_REGISTER = FALSE,            ## Re-register registered curves from previous iteration?
   SimMeanDiff_Threshold = 0.001,
-  MinSimilarityThreshold = 0.25
+  MinSimilarityThreshold = 0.25,
+  MAX_ITERATION = 6
 ){
   abscissa <- seq( from = abscissaFrom, to = abscissaTo, by = abscissaIncrement ) 
   moleculesForConsensus <- colnames( dataToRegister )
@@ -191,7 +192,7 @@ registerIterated <- function(
     if( SimMeanDiff < SimMeanDiff_Threshold ) Iterate <- FALSE
     Index <- Index + 1
     if( Index == 2) Iterate <- TRUE   ## This line ensures at least 2 iterations.
-    if( Index == 6) Iterate <- FALSE  ## Maximum 6 iterations
+    if( Index == MAX_ITERATION) Iterate <- FALSE  ## Maximum 6 iterations
     
   } ## End of while loop started in line 38
   

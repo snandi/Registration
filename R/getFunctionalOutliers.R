@@ -25,7 +25,7 @@ getFunctionalOutliers <- function(
     names = Names,
     fdata2d = FALSE
   )
-
+  set.seed( seed = 100 )
   if( Trim == 'Yes' ){
 
     if( DepthType == 'FM' ){
