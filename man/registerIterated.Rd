@@ -12,7 +12,8 @@ Uses the \code{fda::register.fd} function to register a sample of curves, after 
 \usage{
 registerIterated(
   dataToRegister, 
-  Lambdas_ConstrainedWarping = c(0.01, 0.005, 0.025), 
+  Lambdas_ConstrainedWarping = c(0.001, 0.0001, 0.00005), 
+  LambdaDefault = 0.00001,
   abscissaFrom, 
   abscissaTo, 
   abscissaIncrement, 
@@ -21,8 +22,8 @@ registerIterated(
   Lambdas_Roughness = exp(-5:5), 
   outlierTrimPct = 0.2, 
   RE_REGISTER = FALSE, 
-  SimMeanDiff_Threshold = 0.001, 
-  MinSimilarityThreshold = 0.25, 
+  SimMeanDiff_Threshold = 0.0001, 
+  MinSimilarityThreshold = 0.15, 
   MAX_ITERATION = 6
 )
 }
@@ -35,6 +36,9 @@ A matrix of curves to register. Each column is a new curve.
   \item{Lambdas_ConstrainedWarping}{
 %%     ~~Describe \code{Lambdas_ConstrainedWarping} here~~
 The roughness penalty for estimating the warping function. Smaller values will allow more undulations in the warping function. 
+}
+  \item{LambdaDefault}{
+The default roughness penalty, set to 0.00001. The \eqn{\lambda} is set to this value if the function iterates longer than the list of \eqn{\lambda} provided in \code{Lambdas_ConstrainedWarping}
 }
   \item{abscissaFrom}{
 %%     ~~Describe \code{abscissaFrom} here~~
@@ -116,7 +120,8 @@ Arguments <- growth[['age']]
 
 #Mat1Registered <- registerIterated(
 #  dataToRegister = Mat1, 
-#  Lambdas_ConstrainedWarping = c(0.01, 0.005, 0.025), 
+#  Lambdas_ConstrainedWarping = c(0.001, 0.0001, 0.00005), 
+#  LambdaDefault = 0.00001,
 #  abscissaFrom = 1, 
 #  abscissaTo = 16, 
 #  abscissaIncrement = 0.5, 

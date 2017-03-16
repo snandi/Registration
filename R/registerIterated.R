@@ -8,7 +8,8 @@
 ############################################################################### 
 registerIterated <- function( 
   dataToRegister, 
-  Lambdas_ConstrainedWarping = c(0.01, 0.005, 0.0025), 
+  Lambdas_ConstrainedWarping = c(0.001, 0.0001, 0.00005), 
+  LambdaDefault = 0.00001,
   abscissaFrom,
   abscissaTo,
   abscissaIncrement,
@@ -44,7 +45,7 @@ registerIterated <- function(
     if( !( is.na( Lambdas_ConstrainedWarping[ Index ] ) ) ){
       Lambda <- Lambdas_ConstrainedWarping[ Index ]
     } else {
-      Lambda <- 0.001
+      Lambda <- LambdaDefault
     }
     
     basisLength <- length( abscissa )/basisBreakFreq
@@ -54,7 +55,7 @@ registerIterated <- function(
     WfdParobj <- fdPar( fdobj = Wfd0, Lfdobj = 3, lambda = Lambda )
     
     if( Index == 1 ){
-      ## Detect Outliers
+      ## Detect Outliers method "RProj"
       Outliers_RProj_Trim <- getFunctionalOutliers (
         Curves      = dataToRegister, 
         Xaxis       = abscissa, 
@@ -66,6 +67,7 @@ registerIterated <- function(
       )
       print( Outliers_RProj_Trim$outliers )
       
+      ## Detect Outliers method "FM"
       Outliers_FM_Trim <- getFunctionalOutliers (
         Curves = dataToRegister, 
         Xaxis = abscissa, 
@@ -76,8 +78,34 @@ registerIterated <- function(
         TrimPct = outlierTrimPct
       )
       print( Outliers_FM_Trim$outliers )
-      Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers ) )    
+      Outliers_Union <- union( x = Outliers_RProj_Trim$outliers, y = Outliers_FM_Trim$outliers )    
+
+      ## Detect Outliers method "RTukey"
+      Outliers_RTukey_Trim <- getFunctionalOutliers (
+        Curves = dataToRegister, 
+        Xaxis = abscissa, 
+        Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
+        DepthType = 'RTukey',
+        N_Bootstrap = 500,
+        Trim = 'Yes',
+        TrimPct = outlierTrimPct
+      )
+      print( Outliers_RTukey_Trim$outliers )
+      Outliers_Union <- union( x = Outliers_Union, y = Outliers_RTukey_Trim$outliers )    
       
+      ## Detect Outliers method "Mode"
+      Outliers_Mode_Trim <- getFunctionalOutliers (
+        Curves = dataToRegister, 
+        Xaxis = abscissa, 
+        Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
+        DepthType = 'RTukey',
+        N_Bootstrap = 500,
+        Trim = 'Yes',
+        TrimPct = outlierTrimPct
+      )
+      print( Outliers_Mode_Trim$outliers )
+      Outliers_Union <- union( x = Outliers_Union, y = Outliers_Mode_Trim$outliers )    
+
       Keep <- moleculesForConsensus %w/o% Outliers_Union
       dataToRegisterNoOutliers <- dataToRegister[ , Keep ]
       
@@ -161,6 +189,7 @@ registerIterated <- function(
       
       Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
                                    names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] ) )    
+      print( Outliers_Union )
       
       Keep <- moleculesForConsensus %w/o% Outliers_Union
       Regfd1_noOutliers <- Regfd1_eval[ , Keep ]
@@ -216,7 +245,7 @@ registerIterated <- function(
       names( Sim_After_Regist ) <- moleculesForConsensus
       
       Outliers_Union <- union( 
-        x = Outliers_Union, 
+        x = union( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers ), 
         y = names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] 
       )
       
@@ -278,7 +307,7 @@ registerIterated <- function(
   print( Outliers_FM_Trim$outliers )
   
   Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
-                               names( Sim_After_Regist )[ Sim_After_Regist < 0 ] ) )    
+                               names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] ) )    
   
   ## This returns only the curves that should be used to estimate the consensus
   notOutlier <- moleculesForConsensus %w/o% Outliers_Union
