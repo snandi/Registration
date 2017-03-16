@@ -8,7 +8,7 @@
 ############################################################################### 
 registerIterated <- function( 
   dataToRegister, 
-  Lambdas_ConstrainedWarping = c(0.01, 0.005, 0.025), 
+  Lambdas_ConstrainedWarping = c(0.01, 0.005, 0.0025), 
   abscissaFrom,
   abscissaTo,
   abscissaIncrement,
@@ -17,8 +17,8 @@ registerIterated <- function(
   Lambdas_Roughness = exp( -5:5 ),
   outlierTrimPct = 0.20,
   RE_REGISTER = FALSE,            ## Re-register registered curves from previous iteration?
-  SimMeanDiff_Threshold = 0.001,
-  MinSimilarityThreshold = 0.25,
+  SimMeanDiff_Threshold = 0.0001,
+  MinSimilarityThreshold = 0.15,
   MAX_ITERATION = 6
 ){
   abscissa <- seq( from = abscissaFrom, to = abscissaTo, by = abscissaIncrement ) 
@@ -56,16 +56,29 @@ registerIterated <- function(
     if( Index == 1 ){
       ## Detect Outliers
       Outliers_RProj_Trim <- getFunctionalOutliers (
+        Curves      = dataToRegister, 
+        Xaxis       = abscissa, 
+        Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
+        DepthType   = 'RProj',
+        N_Bootstrap = 500,
+        Trim        = 'Yes',
+        TrimPct     = outlierTrimPct
+      )
+      print( Outliers_RProj_Trim$outliers )
+      
+      Outliers_FM_Trim <- getFunctionalOutliers (
         Curves = dataToRegister, 
         Xaxis = abscissa, 
         Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
-        DepthType = 'RProj',
+        DepthType = 'FM',
         N_Bootstrap = 500,
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
-      print( Outliers_RProj_Trim$outliers )
-      Keep <- moleculesForConsensus %w/o% Outliers_RProj_Trim$outliers
+      print( Outliers_FM_Trim$outliers )
+      Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers ) )    
+      
+      Keep <- moleculesForConsensus %w/o% Outliers_Union
       dataToRegisterNoOutliers <- dataToRegister[ , Keep ]
       
       ## Estimate weighted mean, without the outliers (TEMPLATE)
@@ -91,6 +104,7 @@ registerIterated <- function(
       )
       options( warn = 0 )
       Sim_toMedian <- round( Sim_Before_Regist, 4 )
+      names( Sim_toMedian ) <- colnames( dataToRegister )
       
       ## Register first iteration
       Regfd_All <- register.fd(
@@ -117,6 +131,7 @@ registerIterated <- function(
       )
       options( warn = 0 )
       Sim_toMedian <- rbind( Sim_toMedian, round( Sim_After_Regist, 4 ) )
+      names( Sim_After_Regist ) <- moleculesForConsensus
       ## End of if statement for first iteration, started in line 52 
     } else{ 
       rm( Regfd_All )
@@ -132,7 +147,22 @@ registerIterated <- function(
         TrimPct     = outlierTrimPct
       )
       print(Outliers_RProj_Trim$outliers)
-      Keep <- moleculesForConsensus %w/o% Outliers_RProj_Trim$outliers
+      
+      Outliers_FM_Trim <- getFunctionalOutliers (
+        Curves      = Regfd1_eval, 
+        Xaxis       = abscissa, 
+        Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
+        DepthType   = 'FM',
+        N_Bootstrap = 500,
+        Trim        = 'Yes',
+        TrimPct     = outlierTrimPct
+      )
+      print( Outliers_FM_Trim$outliers )
+      
+      Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
+                                   names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] ) )    
+      
+      Keep <- moleculesForConsensus %w/o% Outliers_Union
       Regfd1_noOutliers <- Regfd1_eval[ , Keep ]
       
       ## Estimate weighted mean, without the outliers (TEMPLATE)
@@ -183,12 +213,27 @@ registerIterated <- function(
       )
       options( warn = 0 )
       Sim_toMedian <- rbind( Sim_toMedian, round( Sim_After_Regist, 4 ) )
+      names( Sim_After_Regist ) <- moleculesForConsensus
+      
+      Outliers_Union <- union( 
+        x = Outliers_Union, 
+        y = names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] 
+      )
+      
       print( Sim_toMedian )
     } ## End of iterated registration if condition
     
     ## Check if iteration should continue
+    notOutlier <- moleculesForConsensus %w/o% Outliers_Union
+    
     SimPrevious <- Sim_toMedian[Index, ]
-    SimMeanDiff <- mean( Sim_After_Regist[Sim_After_Regist > 0]) - mean( SimPrevious[SimPrevious > 0] )
+    
+    SimMean_New <- mean( Sim_After_Regist[ notOutlier ] )
+    SimMean_Old <- mean( SimPrevious[ notOutlier ] )
+    print( paste( 'SimMeans', SimMean_New, SimMean_Old ) )
+    
+    SimMeanDiff <- abs( SimMean_New - SimMean_Old )
+
     if( SimMeanDiff < SimMeanDiff_Threshold ) Iterate <- FALSE
     Index <- Index + 1
     if( Index == 2) Iterate <- TRUE   ## This line ensures at least 2 iterations.
@@ -221,8 +266,22 @@ registerIterated <- function(
   )
   print( Outliers_RProj_Trim$outliers )
   
+  Outliers_FM_Trim <- getFunctionalOutliers (
+    Curves      = registeredCurvesAll, 
+    Xaxis       = abscissa, 
+    Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
+    DepthType   = 'FM',
+    N_Bootstrap = 500,
+    Trim        = 'Yes',
+    TrimPct     = outlierTrimPct
+  )
+  print( Outliers_FM_Trim$outliers )
+  
+  Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
+                               names( Sim_After_Regist )[ Sim_After_Regist < 0 ] ) )    
+  
   ## This returns only the curves that should be used to estimate the consensus
-  notOutlier <- moleculesForConsensus %w/o% Outliers_RProj_Trim$outliers
+  notOutlier <- moleculesForConsensus %w/o% Outliers_Union
   print( c("not outliers", notOutlier ) )
   aboveThreshold <- moleculesForConsensus[ SimPrevious > MinSimilarityThreshold ]
   print( c( "above threshold", aboveThreshold ) )
