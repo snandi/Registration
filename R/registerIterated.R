@@ -38,7 +38,7 @@ registerIterated <- function(
   Iterate <- TRUE
   
   Index <- Index + 1
-  Sim_toMedian <- c() ## Contains the similarities of all curves to their median
+  Sim_toTemplate <- c() ## Contains the similarities of all curves to their median
   
   while ( Iterate == TRUE ){
     print( paste( 'Starting Iteration', Index ) )
@@ -131,8 +131,9 @@ registerIterated <- function(
         Deriv             = FALSE
       )
       options( warn = 0 )
-      Sim_toMedian <- round( Sim_Before_Regist, 4 )
-      names( Sim_toMedian ) <- colnames( dataToRegister )
+      Sim_toTemplate <- round( Sim_Before_Regist, 4 )
+      names( Sim_toTemplate ) <- colnames( dataToRegister )
+      print( Sim_toTemplate )
       
       ## Register first iteration
       Regfd_All <- register.fd(
@@ -158,8 +159,10 @@ registerIterated <- function(
         Deriv             = FALSE
       )
       options( warn = 0 )
-      Sim_toMedian <- rbind( Sim_toMedian, round( Sim_After_Regist, 4 ) )
+      Sim_toTemplate <- rbind( Sim_toTemplate, round( Sim_After_Regist, 4 ) )
       names( Sim_After_Regist ) <- moleculesForConsensus
+      print( paste( 'Iteration', Index ) )
+      print( Sim_toTemplate )
       ## End of if statement for first iteration, started in line 52 
     } else{ 
       rm( Regfd_All )
@@ -241,7 +244,7 @@ registerIterated <- function(
         Deriv             = FALSE
       )
       options( warn = 0 )
-      Sim_toMedian <- rbind( Sim_toMedian, round( Sim_After_Regist, 4 ) )
+      Sim_toTemplate <- rbind( Sim_toTemplate, round( Sim_After_Regist, 4 ) )
       names( Sim_After_Regist ) <- moleculesForConsensus
       
       Outliers_Union <- union( 
@@ -249,17 +252,18 @@ registerIterated <- function(
         y = names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] 
       )
       
-      print( Sim_toMedian )
+      print( paste( 'Iteration', Index ) )
+      print( Sim_toTemplate )
     } ## End of iterated registration if condition
     
     ## Check if iteration should continue
     notOutlier <- moleculesForConsensus %w/o% Outliers_Union
     
-    SimPrevious <- Sim_toMedian[Index, ]
+    SimPrevious <- Sim_toTemplate[Index, ]
     
     SimMean_New <- mean( Sim_After_Regist[ notOutlier ] )
     SimMean_Old <- mean( SimPrevious[ notOutlier ] )
-    print( paste( 'SimMeans', SimMean_New, SimMean_Old ) )
+    print( paste( 'SimMeans', round( SimMean_New, 5 ), round( SimMean_Old, 5 ) ) )
     
     SimMeanDiff <- abs( SimMean_New - SimMean_Old )
 
@@ -274,7 +278,7 @@ registerIterated <- function(
   Regfd_Final <- Regfd_All
   registeredCurves <- eval.fd( evalarg = abscissa, fdobj = Regfd_Final$regfd )
   registeredCurves.D1 <- eval.fd( evalarg = abscissa, fdobj = Regfd_Final$regfd, Lfdobj = 1 )
-  SimPrevious <- Sim_toMedian[ ( Index - 1 ), ]
+  SimPrevious <- Sim_toTemplate[ ( Index - 1 ), ]
   
   colnames( registeredCurves ) <- moleculesForConsensus
   colnames( registeredCurves.D1 ) <- moleculesForConsensus
@@ -333,6 +337,6 @@ registerIterated <- function(
                 registeredCurvesAll.D1 = registeredCurvesAll.D1, 
                 registeredCurves       = registeredCurves, 
                 registeredCurves.D1    = registeredCurves.D1, 
-                Sim_toMedian           = Sim_toMedian
+                Sim_toTemplate         = Sim_toTemplate
   ) )
 }
