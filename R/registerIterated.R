@@ -66,7 +66,7 @@ registerIterated <- function(
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
-      print( Outliers_RProj_Trim$outliers )
+      #print( Outliers_RProj_Trim$outliers )
       
       ## Detect Outliers method "FM"
       Outliers_FM_Trim <- getFunctionalOutliers (
@@ -78,7 +78,7 @@ registerIterated <- function(
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
-      print( Outliers_FM_Trim$outliers )
+      #print( Outliers_FM_Trim$outliers )
       Outliers_Union <- union( x = Outliers_RProj_Trim$outliers, y = Outliers_FM_Trim$outliers )    
       
       ## Detect Outliers method "RTukey"
@@ -91,7 +91,7 @@ registerIterated <- function(
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
-      print( Outliers_RTukey_Trim$outliers )
+      #print( Outliers_RTukey_Trim$outliers )
       Outliers_Union <- union( x = Outliers_Union, y = Outliers_RTukey_Trim$outliers )    
       
       ## Detect Outliers method "Mode"
@@ -104,7 +104,7 @@ registerIterated <- function(
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
-      print( Outliers_Mode_Trim$outliers )
+      #print( Outliers_Mode_Trim$outliers )
       Outliers_Union <- union( x = Outliers_Union, y = Outliers_Mode_Trim$outliers )    
       
       Keep <- moleculesForConsensus %w/o% Outliers_Union
@@ -179,7 +179,7 @@ registerIterated <- function(
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
-      print( Outliers_RProj_Trim$outliers )
+      #print( Outliers_RProj_Trim$outliers )
       
       Outliers_FM_Trim <- getFunctionalOutliers (
         Curves      = Regfd1_eval, 
@@ -190,16 +190,22 @@ registerIterated <- function(
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
-      print( Outliers_FM_Trim$outliers )
+      #print( Outliers_FM_Trim$outliers )
       
       Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
                                    names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] ) )    
-      print( Outliers_Union )
+      #print( Outliers_Union )
       if( length( Outliers_Union ) > maxOutliersPerIteration ){
         OrderedSim_After_Regist <- Sim_After_Regist[ Outliers_Union ][order( Sim_After_Regist[ Outliers_Union ] )]
         Outliers_Union <- names( OrderedSim_After_Regist[1:maxOutliersPerIteration] )
       }
-      print( Outliers_Union )
+      for( OutlierCurve in Outliers_Union ){
+        if( Sim_After_Regist[OutlierCurve] > 0.5 ) {
+          Outliers_Union <- Outliers_Union %w/o% OutlierCurve
+          #print( Sim_After_Regist[OutlierCurve] )
+        }
+      }
+      #print( Outliers_Union )
       
       Keep <- moleculesForConsensus %w/o% Outliers_Union
       Regfd1_noOutliers <- Regfd1_eval[ , Keep ]
@@ -262,7 +268,14 @@ registerIterated <- function(
         OrderedSim_After_Regist <- Sim_After_Regist[ Outliers_Union ][order( Sim_After_Regist[ Outliers_Union ] )]
         Outliers_Union <- names( OrderedSim_After_Regist[1:maxOutliersPerIteration] )
       }
-      print( Outliers_Union )
+      #print( Outliers_Union )
+      for( OutlierCurve in Outliers_Union ){
+        if( Sim_After_Regist[OutlierCurve] > 0.5 ) {
+          Outliers_Union <- Outliers_Union %w/o% OutlierCurve
+          #print( Sim_After_Regist[OutlierCurve] )
+        }
+      }
+      #print( Outliers_Union )
       
       print( paste( 'Iteration', Index, 'Complete' ) )
       print( Sim_toTemplate )
@@ -310,7 +323,7 @@ registerIterated <- function(
     Trim        = 'Yes',
     TrimPct     = outlierTrimPct
   )
-  print( Outliers_RProj_Trim$outliers )
+  #print( Outliers_RProj_Trim$outliers )
   
   Outliers_FM_Trim <- getFunctionalOutliers (
     Curves      = registeredCurvesAll, 
@@ -321,7 +334,7 @@ registerIterated <- function(
     Trim        = 'Yes',
     TrimPct     = outlierTrimPct
   )
-  print( Outliers_FM_Trim$outliers )
+  #print( Outliers_FM_Trim$outliers )
   
   Outliers_Union <- unique( c( Outliers_RProj_Trim$outliers, Outliers_FM_Trim$outliers, 
                                names( Sim_After_Regist )[ Sim_After_Regist < MinSimilarityThreshold ] ) )    
@@ -330,14 +343,17 @@ registerIterated <- function(
     OrderedSim_After_Regist <- Sim_After_Regist[ Outliers_Union ][order( Sim_After_Regist[ Outliers_Union ] )]
     Outliers_Union <- names( OrderedSim_After_Regist[1:maxOutliersPerIteration] )
   }
+  for( OutlierCurve in Outliers_Union ){
+    if( Sim_After_Regist[OutlierCurve] > 0.5 ) {
+      Outliers_Union <- Outliers_Union %w/o% OutlierCurve
+      #print( Sim_After_Regist[OutlierCurve] )
+    }
+  }
+  #print( Outliers_Union )
   
   ## This returns only the curves that should be used to estimate the consensus
-  notOutlier <- moleculesForConsensus %w/o% Outliers_Union
-  print( c("not outliers", notOutlier ) )
-  aboveThreshold <- moleculesForConsensus[ SimPrevious > MinSimilarityThreshold ]
-  print( c( "above threshold", aboveThreshold ) )
-  curvesForConsensus <- intersect( notOutlier, aboveThreshold )
-  print( c( "consensus curves", curvesForConsensus ) )
+  curvesForConsensus <- moleculesForConsensus %w/o% Outliers_Union
+  #print( c( "consensus curves", curvesForConsensus ) )
   
   registeredCurves <- registeredCurvesAll[ , curvesForConsensus ]
   registeredCurves.D1 <- registeredCurvesAll.D1[ , curvesForConsensus ]
