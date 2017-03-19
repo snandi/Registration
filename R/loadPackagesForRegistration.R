@@ -22,7 +22,6 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'clValid',
     'doParallel',  ## For parallel execution with foreach
     'doSNOW',
-    'dplyr',
     'fda',
     'fdakma',
     # 'fdasrvf',
@@ -42,6 +41,7 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'parallel',
     'png',
     'plyr',
+    'dplyr',       ## It is recommended that dplyr is loaded after plyr
     'randomForest',
     'refund', 
     'reshape',
