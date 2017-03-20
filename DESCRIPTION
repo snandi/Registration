@@ -23,6 +23,7 @@ Imports:
     gbm,
     ggplot2,
     gridExtra,
+    gtools,
     adk,
     MASS,
     matrixStats,
