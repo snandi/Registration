@@ -54,7 +54,12 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-
+data( SeqCompData )
+segmentDataWithKernel <- prepareDataWithSymmetricKernel( 
+    SeqCompData =  SeqCompData, 
+    kernelType = KERNEL_TYPE, 
+    colnamesNonSeq = c( 'Chr', 'Segment', 'segmentPixels' )
+)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

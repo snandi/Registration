@@ -10,6 +10,7 @@ Description: Contains functions for iterated, constrained registration, and
     in detecting differences in two sets of curves
 Depends:
     R (>= 3.1)
+LazyData: true
 Imports:
     Biostrings,
     car,
