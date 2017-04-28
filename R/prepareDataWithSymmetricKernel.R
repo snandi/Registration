@@ -5,6 +5,9 @@ prepareDataWithSymmetricKernel <- function(
   colnamesNonSeq = c( 'consensusMean', 'Interval', 'subInterval', 'subIntervalPixels' )
 ){
   if( kernelType == 'Gaussian' ){
+    ## Define the kernel function
+    KernelGaussian <- function(h){ exp(-(1/2)*{h^2})}
+    
     K0 <- KernelGaussian( h = 0 )
     K1 <- KernelGaussian( h = 1 )
     K2 <- KernelGaussian( h = 2 )
