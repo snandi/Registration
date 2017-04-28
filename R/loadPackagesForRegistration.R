@@ -8,6 +8,10 @@
 #'@import Biostrings
 #'@import car
 #'@import cluster
+#'@import tree
+#'@import fda
+#'@import fdakma
+#'@import ggplot2
 
 #'@export 
 
@@ -47,9 +51,10 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'reshape',
     'reshape2',
     'RFunctionsSN', 
-    'robustX',   ## For multivariate median
+    'robustX',     ## For multivariate median
     'rpart',
     'seqinr',
+    'tree',        ## For extracting and plotting Random forest trees
     'utils'
   )
 

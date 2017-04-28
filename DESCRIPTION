@@ -35,6 +35,7 @@ Imports:
     randomForest, 
     reshape2,
     RFunctionsSN,
-    robustX
+    robustX,
+    tree
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1
