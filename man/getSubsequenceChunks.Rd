@@ -8,10 +8,7 @@ Get subsequence chunks from a long sequence
 This function takes in a DNA sequence "agggctattaaccctttaaa" in the form of an array of characters and returns smaller subsequence chunks based on user specified number
 }
 \usage{
-getSubsequenceChunks(
-  Sequence, 
-  numChunks, 
-  force.number.of.groups = TRUE
+getSubsequenceChunks( Sequence, numChunks, force.number.of.groups = TRUE )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,7 +19,7 @@ A DNA sequence in the form of an array of characters: "a" "g" "g" "c" "t"
 Number of subsequence chunks desired
 }
   \item{force.number.of.groups}{
-If TRUE, it will append the remainder of the elements to the last chunk
+If \code{TRUE}, it will append the remainder of the elements to the last chunk
 }
 }
 \details{
@@ -53,11 +50,11 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-library( seqinr )
+%library( seqinr )
 getSubsequenceChunks( 
-  Sequence = s2c( "agggctattaaccctttaaa" ), 
+  Sequence = seqinr::s2c( "agggctattaaccctttaaa" ), 
   numChunks = 3, 
-  force.number.of.groups = T )
+  force.number.of.groups = TRUE )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

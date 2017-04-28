@@ -36,6 +36,7 @@ Imports:
     reshape2,
     RFunctionsSN,
     robustX,
+    seqinr,
     tree
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1

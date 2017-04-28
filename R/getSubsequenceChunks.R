@@ -9,7 +9,7 @@ getSubsequenceChunks <- function(
   Sequence, 
   numChunks, 
   force.number.of.groups = TRUE
- ) { 
+) { 
   ## The argument force.number.of.groups=TRUE means it will append the 
   ## remainder of the elements to the last chunk
   len <- length( Sequence )
