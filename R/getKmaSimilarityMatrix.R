@@ -2,6 +2,40 @@
 #'@import gtools
 #'@export
 
+#' @title Get a pairwise similarity matrix of a group of curves
+#' 
+#' @description Returns pairwise similarity between columns of a matrix of first derivatives of curves, 
+#' and the average of the similarities
+#'
+#' @param Mat Matrix with each column representing a separate curve
+#' 
+#' @param Xaxis Vector of numbers, the abscissa
+#' 
+#' @param similarity.method Type of similarity method to use
+#' 
+#' @details Assumed that the x-axis of all the functions will be the same 
+#' d1 corresponds to first derivatives. Make sure the matrix Mat is that of
+#' first derivatives and not just the function values
+#' 
+#' @author Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands31@gmail.com
+#' 
+#' @usage getKmaSimilarityWithTemplate( Mat, Template, Xaxis, 
+#' similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered"), Deriv = FALSE )
+#' 
+#' @examples
+#' data( growth, package = 'fda')
+#' Mat1 <- growth[['hgtm']]
+#' Arguments <- growth[['age']]
+#' Template <- rowMeans( Mat1 )
+#' getKmaSimilarityWithTemplate( Mat = Mat1, Template = Template, Xaxis = Arguments, 
+#' similarity.method = "d1.pearson", Deriv = FALSE )
+#' 
+#' @return List of two objects
+#' \item{ColCombs}{A data frame of pairwise comparison similarity index}
+#' \item{AvgSimilarity}{Average of all similarities}
+#' 
+
+
 ########################################################################## 
 ## To use kma.similarity for a matrix                           
 ########################################################################## 
@@ -10,12 +44,6 @@ getKmaSimilarityMatrix <- function(
   Xaxis,
   similarity.method = c( "d1.pearson", "d1.L2", "d1.L2.centered" )
  ){
-  ## Assume that similarity measure is to be estimated between columns
-  ## of the matrix. 
-  ## Assumed that the x-axis of all the functions will be the same
-  ## Return the average of the similarity index, between all the columns
-  ## d1 corresponds to first derivatives. Make sure the matrix Mat is that of
-  ## first derivatives and not just the function values
   
   Vector <- c( 1:ncol( Mat ) )
   if( !is.null( colnames( Mat ) ) ){

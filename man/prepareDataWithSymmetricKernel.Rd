@@ -57,7 +57,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 data( SeqCompData )
 segmentDataWithKernel <- prepareDataWithSymmetricKernel( 
     SeqCompData =  SeqCompData, 
-    kernelType = KERNEL_TYPE, 
+    kernelType = "Gaussian", 
     colnamesNonSeq = c( 'Chr', 'Segment', 'segmentPixels' )
 )
 }

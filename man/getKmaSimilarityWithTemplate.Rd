@@ -73,9 +73,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 \code{fdakma::kma.similarity}
 }
 \examples{
-require( fda )
-require( fdakma )
-data( growth )
+data( growth, package = 'fda')
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 Template <- rowMeans( Mat1 )
