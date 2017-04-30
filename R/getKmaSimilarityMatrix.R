@@ -26,15 +26,12 @@
 #' data( growth, package = 'fda')
 #' Mat1 <- growth[['hgtm']]
 #' Arguments <- growth[['age']]
-#' Template <- rowMeans( Mat1 )
-#' getKmaSimilarityWithTemplate( Mat = Mat1, Template = Template, Xaxis = Arguments, 
-#' similarity.method = "d1.pearson", Deriv = FALSE )
+#' getKmaSimilarityMatrix( Mat = Mat1, Xaxis = Arguments, similarity.method = "d1.pearson" )
 #' 
 #' @return List of two objects
 #' \item{ColCombs}{A data frame of pairwise comparison similarity index}
 #' \item{AvgSimilarity}{Average of all similarities}
 #' 
-
 
 ########################################################################## 
 ## To use kma.similarity for a matrix                           
