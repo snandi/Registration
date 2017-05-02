@@ -1,4 +1,5 @@
 #'@export
+#'@importFrom stats median
 
 ########################################################################
 ## Returns sup of D statistic (max pointwise diff) between two matrices

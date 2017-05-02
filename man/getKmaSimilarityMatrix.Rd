@@ -4,8 +4,7 @@
 \alias{getKmaSimilarityMatrix}
 \title{Get a pairwise similarity matrix of a group of curves}
 \usage{
-getKmaSimilarityWithTemplate( Mat, Template, Xaxis, 
-similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered"), Deriv = FALSE )
+getKmaSimilarityMatrix( Mat, Xaxis, similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered") )
 }
 \arguments{
 \item{Mat}{Matrix with each column representing a separate curve}

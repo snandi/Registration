@@ -1,5 +1,6 @@
 #'@export
-
+#'@importFrom stats median var
+#'
 ########################################################################
 ## Returns sup of T-type statistic between two matrices
 ########################################################################

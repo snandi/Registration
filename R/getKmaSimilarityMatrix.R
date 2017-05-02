@@ -19,8 +19,7 @@
 #' 
 #' @author Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands31@gmail.com
 #' 
-#' @usage getKmaSimilarityWithTemplate( Mat, Template, Xaxis, 
-#' similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered"), Deriv = FALSE )
+#' @usage getKmaSimilarityMatrix( Mat, Xaxis, similarity.method = c("d1.pearson", "d1.L2", "d1.L2.centered") )
 #' 
 #' @examples
 #' data( growth, package = 'fda')

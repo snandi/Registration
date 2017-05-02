@@ -12,6 +12,8 @@
 #'@import fda
 #'@import gridExtra
 #'@import ggplot2
+#'@importFrom RFunctionsSN rowSE
+#'@importFrom graphics plot
 #@import fdasrvf
 
 # require(ggplot2)
@@ -19,15 +21,15 @@
 # require(fdasrvf)
 
 plotbyCurve_regist_fda <- function(
-                                   registOutput,
-                                   TrueWarp = NULL,
-                                   Lambda = NULL,
-                                   Ylabel = NULL,
-                                   Xlabel = NULL
+  registOutput,
+  TrueWarp = NULL,
+  Lambda = NULL,
+  Ylabel = NULL,
+  Xlabel = NULL
 ) {
-#   require(ggplot2)
-#   require(gridExtra)
-#   require(fdasrvf)
+  #   require(ggplot2)
+  #   require(gridExtra)
+  #   require(fdasrvf)
   #  plots the output of registration function register.fd, one curve at a time
   #
   #  Argument:
@@ -138,8 +140,8 @@ plotbyCurve_regist_fda <- function(
       scale_colour_manual(name = '', values = c('Original' = Col.Orig, 'Mean' = Col.Mean, 'Registered' = Col.Reg),
                           breaks = c("Original", "Mean", "Registered")) +
       theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
-#             panel.background = element_rect(fill = 'black'), 
-#             plot.background = element_rect(color = 'black', fill = "gray10"), 
+            #             panel.background = element_rect(fill = 'black'), 
+            #             plot.background = element_rect(color = 'black', fill = "gray10"), 
             panel.background = element_rect(fill = 'gray60'), 
             plot.background = element_rect(color = 'gray60', fill = "gray60"), 
             axis.text = element_text(colour = "white", size = 10), 
@@ -150,7 +152,7 @@ plotbyCurve_regist_fda <- function(
             legend.position = c(0.5,0.9), 
             legend.direction = 'horizontal', 
             legend.text = element_text(size = 10, colour = 'white'),
-#             legend.background = element_rect(fill = 'black')
+            #             legend.background = element_rect(fill = 'black')
             legend.background = element_rect(fill = 'gray60')
       )
     
@@ -192,20 +194,20 @@ plotbyCurve_regist_fda <- function(
 # This function currently prints the plots it generates. It should be wrapped inside a
 # pdf object call. 
 plotAll_regist_fda <- function(
-                               registOutput,
-                               TrueWarp = NULL,
-                               Lambda = NULL,
-                               TitleText = "",
-                               Ylabel = NULL,
-                               Xlabel = NULL,
-                               BeforeAfterDistance = TRUE,
-                               PlotBeforeRegist = TRUE,
-                               Xarg_fine = NULL,
-                               saveToPDF = FALSE
+  registOutput,
+  TrueWarp = NULL,
+  Lambda = NULL,
+  TitleText = "",
+  Ylabel = NULL,
+  Xlabel = NULL,
+  BeforeAfterDistance = TRUE,
+  PlotBeforeRegist = TRUE,
+  Xarg_fine = NULL,
+  saveToPDF = FALSE
 ) {
-#   require(ggplot2)
-#   require(gridExtra)
-#   require(reshape2)
+  #   require(ggplot2)
+  #   require(gridExtra)
+  #   require(reshape2)
   #  plots the output of registration function register.fd, one curve at a time
   #
   #  Argument:
@@ -299,7 +301,7 @@ plotAll_regist_fda <- function(
   colnames(Data.Orig) <- c('Pixel', 'Curve', 'Intensity')
   Data.Orig$Pixel <- argfine
   Median_toRegist <- as.data.frame(cbind(Pixel = argfine, Intensity = L1median(t(ymat))$estimate, 
-                                   Curve = 'Median'))
+                                         Curve = 'Median'))
   Median_toRegist <- within(data=Median_toRegist,{
     Pixel <- as.numeric(as.vector(Pixel))
     Intensity <- as.numeric(as.vector(Intensity))
@@ -308,12 +310,12 @@ plotAll_regist_fda <- function(
   if(is.null(Ylabel))  Xlabel <- 'Intensity'
   
   Plot.Orig  <- ggplot(data = Data.Orig, aes_string(x = "Pixel", y = "Intensity", 
-                                                  colour = "Curve", group = "Curve")) + 
+                                                    colour = "Curve", group = "Curve")) + 
     geom_line() + 
     ggtitle(MainTitle) + 
-      xlab(label = Xlabel) +
-      ylab(label = Ylabel) + 
-#    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
+    xlab(label = Xlabel) +
+    ylab(label = Ylabel) + 
+    #    geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill = "gray10"), 
@@ -339,15 +341,15 @@ plotAll_regist_fda <- function(
     Pixel <- as.numeric(as.vector(Pixel))
     Intensity <- as.numeric(as.vector(Intensity))
   })
-
- 
+  
+  
   Plot.Regist  <- ggplot(data = Data.Regist, aes_string(x = "Pixel", y = "Intensity", 
-                                                      colour = "Curve", group = "Curve")) + 
+                                                        colour = "Curve", group = "Curve")) + 
     geom_line() + 
     ggtitle(MainTitle) + 
     geom_line(aes(x = Pixel, y = Intensity), data = Median_toRegist, size = 2, col = 'white') +
-      xlab(label = Xlabel) +
-      ylab(label = Ylabel) + 
+    xlab(label = Xlabel) +
+    ylab(label = Ylabel) + 
     theme(plot.title = element_text(face = "bold", size = 12, colour = "white"),
           panel.background = element_rect(fill = 'black'), 
           plot.background = element_rect(color = 'black', fill = "gray10"), 
@@ -360,17 +362,19 @@ plotAll_regist_fda <- function(
           panel.grid.minor = element_line(colour = "gray20", size = 0.25),
           legend.position = '' 
     )
-
+  
   Consensus_Mean <- rowMeans(yregmat)
-  Consensus_SE <- rowSE( Data = yregmat )
-  Consensus_MeanSE <- as.data.frame(cbind(Intensity = Consensus_Mean, LL = Consensus_Mean - 2*Consensus_SE,
-                                          UU = Consensus_Mean + 2*Consensus_SE, Pixel = argfine))
+  Consensus_SE <- rowSE( Matrix = yregmat )
+  Consensus_MeanSE <- as.data.frame(cbind(
+    Intensity = Consensus_Mean, 
+    LL = Consensus_Mean - 2*Consensus_SE,
+    UU = Consensus_Mean + 2*Consensus_SE, 
+    Pixel = argfine))
   Consensus_MeanSE$Curve <- 'Mean'
   
   Plot.Regist_wSE <- Plot.Regist +
     geom_smooth( aes(y = Intensity, x = Pixel, ymin = LL, ymax = UU), data = Consensus_MeanSE, stat = 'identity', 
                  color = 'gray60', size = 1, fill = 'white', alpha = 0.9)
-  
   
   Data.Warp <- melt(data = warpmat, id = "Curve")
   MainTitle <- paste('Warping functions, Using Min Eig Value', '\n', TitleText)
@@ -380,7 +384,7 @@ plotAll_regist_fda <- function(
   Data.Warp$Curve <- as.factor(Data.Warp$Curve)
   
   Plot.Warp  <- ggplot(data = Data.Warp, aes_string(x = "Pixel", y = "Warp", 
-                                                  colour = "Curve", group = "Curve")) + 
+                                                    colour = "Curve", group = "Curve")) + 
     geom_line() + 
     ggtitle(MainTitle) +
     geom_abline(intercept = 0, slope = 1, col = 'white', size = 1) + 

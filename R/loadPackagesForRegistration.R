@@ -12,7 +12,11 @@
 #'@import fda
 #'@import fdakma
 #'@import ggplot2
+#'@import randomForest
+#'@import robustX
 
+#'@importFrom utils install.packages getCRANmirrors chooseCRANmirror
+#'
 #'@export 
 
 loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE ){

@@ -1,4 +1,3 @@
-#'@export
 # setClass for "dataToRegister"
 
 dataToRegister <- setClass( 
