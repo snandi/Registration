@@ -21,7 +21,9 @@ registerIterated(
   basisBreakFreq = 3, 
   Lambdas_Roughness = exp(-5:5), 
   outlierTrimPct = 0.2, 
-  RE_REGISTER = FALSE, 
+  N_Bootstrap_for_Outlier = 500,
+  RE_REGISTER = FALSE,
+  Convergence_Threshold = 1e-05,
   SimMeanDiff_Threshold = 0.0001, 
   MinSimilarityThreshold = 0.15, 
   MAX_ITERATION = 6
@@ -68,9 +70,15 @@ Roughness penalty for smoothing using B-splines
 %%     ~~Describe \code{outlierTrimPct} here~~
 Percentage to trim when detecting outliers
 }
+  \item{N_Bootstrap_for_Outlier}{
+Number of bootstrap samples to draw, to estimate outlier curves  
+}
   \item{RE_REGISTER}{
 %%     ~~Describe \code{RE_REGISTER} here~~
 Re-register the curves from previous iterations, or register the original noisy curves, at every iteration, to the updated consensus/template
+}
+  \item{Convergence_Threshold}{
+The value for argument \code{conv} in function \code{register.fd}  
 }
   \item{SimMeanDiff_Threshold}{
 %%     ~~Describe \code{SimMeanDiff_Threshold} here~~
@@ -94,21 +102,29 @@ Maximum number of iterations
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
+  \item{dataToRegister}{Original dataset to register}
+  \item{Regfd_Final}{Final registered data object. Output of \code{register.fd}}
+  \item{registeredCurves}{A matrix of registered curves extracted from the registered object}
+  \item{registeredCurves.D1}{A matrix of first derivatives of registered curves extracted from the registered object}
+  \item{FinalConsensus}{Final consensus of registered curves}
+  \item{curvesForConsensus}{Names of curves used to estimate the consensus. This excludes the detected outliers}
+  \item{registeredCurvesAll}{A matrix of all registered curves, including outliers}
+  \item{registeredCurvesAll.D1}{A matrix of first derivatives of all registered curves, including outliers}
+  \item{Sim_toTemplate}{A matrix of similarities of curves to template}
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
 %%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Subhrangshu Nandi; snandi@wisc.edu or nands31@gmail.com
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{register.fd}, \code{registerSingleIter}
 }
 \examples{
 require( fda )
@@ -129,7 +145,9 @@ Arguments <- growth[['age']]
 #  basisBreakFreq = 3, 
 #  Lambdas_Roughness = exp(-5:5), 
 #  outlierTrimPct = 0.05, 
+#  N_Bootstrap_for_Outlier = 500,
 #  RE_REGISTER = FALSE, 
+#  Convergence_Threshold = 1e-05,
 #  SimMeanDiff_Threshold = 0.001, 
 #  MinSimilarityThreshold = 0.25, 
 #  MAX_ITERATION = 4

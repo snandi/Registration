@@ -17,7 +17,9 @@ registerIterated <- function(
   basisBreakFreq = 3,
   Lambdas_Roughness = exp( -5:5 ),
   outlierTrimPct = 0.20,
+  N_Bootstrap_for_Outlier = 500,
   RE_REGISTER = FALSE,            ## Re-register registered curves from previous iteration?
+  Convergence_Threshold = 1e-05,
   SimMeanDiff_Threshold = 0.0001,
   MinSimilarityThreshold = 0.15,
   MAX_ITERATION = 6
@@ -62,7 +64,7 @@ registerIterated <- function(
         Xaxis       = abscissa, 
         Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType   = 'RProj',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
@@ -74,7 +76,7 @@ registerIterated <- function(
         Xaxis = abscissa, 
         Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType = 'FM',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
@@ -87,7 +89,7 @@ registerIterated <- function(
         Xaxis = abscissa, 
         Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType = 'RTukey',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
@@ -100,7 +102,7 @@ registerIterated <- function(
         Xaxis = abscissa, 
         Names = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType = 'RTukey',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim = 'Yes',
         TrimPct = outlierTrimPct
       )
@@ -175,7 +177,7 @@ registerIterated <- function(
         Xaxis       = abscissa, 
         Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType   = 'RProj',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
@@ -186,7 +188,7 @@ registerIterated <- function(
         Xaxis       = abscissa, 
         Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
         DepthType   = 'FM',
-        N_Bootstrap = 500,
+        N_Bootstrap = N_Bootstrap_for_Outlier,
         Trim        = 'Yes',
         TrimPct     = outlierTrimPct
       )
@@ -229,6 +231,7 @@ registerIterated <- function(
           yfd       = Regfd1$regfd, 
           WfdParobj = WfdParobj, 
           dbglev    = 0,
+          conv      = Convergence_Threshold,
           periodic  = FALSE, 
           crit      = 2
         ) 
@@ -238,6 +241,7 @@ registerIterated <- function(
           yfd       = dataToRegisterSmooth$fd, 
           WfdParobj = WfdParobj, 
           dbglev    = 0,
+          conv      = Convergence_Threshold,
           periodic  = FALSE, 
           crit      = 2
         ) 
@@ -319,7 +323,7 @@ registerIterated <- function(
     Xaxis       = abscissa, 
     Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
     DepthType   = 'RProj',
-    N_Bootstrap = 500,
+    N_Bootstrap = N_Bootstrap_for_Outlier,
     Trim        = 'Yes',
     TrimPct     = outlierTrimPct
   )
@@ -330,7 +334,7 @@ registerIterated <- function(
     Xaxis       = abscissa, 
     Names       = list( main = 'Main', xlab = 'PixelPosition', ylab = 'Intensity' ),
     DepthType   = 'FM',
-    N_Bootstrap = 500,
+    N_Bootstrap = N_Bootstrap_for_Outlier,
     Trim        = 'Yes',
     TrimPct     = outlierTrimPct
   )

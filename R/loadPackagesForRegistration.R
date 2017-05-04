@@ -59,7 +59,8 @@ loadPackagesForRegistration <- function( CRANMirror = 83, tryToInstall = FALSE )
     'rpart',
     'seqinr',
     'tree',        ## For extracting and plotting Random forest trees
-    'utils'
+    'utils',
+    'xtable'
   )
 
   ## Requiring packages and installing them if something doesnt exist

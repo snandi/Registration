@@ -12,6 +12,7 @@ registerSingleIter <- function(
   abscissaFrom,
   abscissaTo,
   abscissaIncrement,
+  Convergence_Threshold = 1e-05,
   basisOrder = 4,
   basisBreakFreq = 3,
   Lambdas_Roughness = exp( -5:5 )
@@ -28,12 +29,6 @@ registerSingleIter <- function(
     pbasis         = NULL
   )$curvesSmooth
 
-  Index <- 0
-  
-  Iterate <- TRUE
-  Regist_Objects <- vector(mode = 'list', length = 10)
-  Sim_toMedian <- c() ## Contains the similarities of all curves to their median
-  
   if( !( is.na( Lambda_ConstrainedWarping ) ) ){
     Lambda <- Lambda_ConstrainedWarping
   } else {
@@ -72,6 +67,7 @@ registerSingleIter <- function(
     yfd       = dataToRegisterSmooth$fd, 
     WfdParobj = WfdParobj, 
     dbglev    = 0,
+    conv      = Convergence_Threshold,
     periodic  = FALSE, 
     crit      = 2 ) 
   

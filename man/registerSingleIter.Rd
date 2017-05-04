@@ -16,6 +16,7 @@ registerSingleIter(
   abscissaFrom, 
   abscissaTo, 
   abscissaIncrement, 
+  Convergence_Threshold = 1e-05,
   basisOrder = 4, 
   basisBreakFreq = 3, 
   Lambdas_Roughness = exp(-5:5)
@@ -43,6 +44,9 @@ Maximum value of abscissa
 %%     ~~Describe \code{abscissaIncrement} here~~
 Increment of abscissa
 }
+  \item{Convergence_Threshold}{
+The value for argument \code{conv} in function \code{register.fd}  
+}
   \item{basisOrder}{
 %%     ~~Describe \code{basisOrder} here~~
 Order of B-spline bases
@@ -61,10 +65,10 @@ Roughness penalty for smoothing using B-splines
 }
 \value{
 %%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  \item{dataToRegister}{Original dataset to register}
+  \item{Regfd_Final}{Final registered data object. Output of \code{register.fd}}
+  \item{registeredCurves}{A matrix of registered curves extracted from the registered object}
+  \item{registeredCurves.D1}{A matrix of first derivatives of registered curves extracted from the registered object}
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -95,6 +99,7 @@ Arguments <- growth[['age']]
 #  abscissaFrom = 1, 
 #  abscissaTo = 16, 
 #  abscissaIncrement = 0.5, 
+#  Convergence_Threshold = 1e-05,
 #  basisOrder = 5, 
 #  basisBreakFreq = 3, 
 #  Lambdas_Roughness = exp(-5:5), 
