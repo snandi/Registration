@@ -31,6 +31,7 @@ getKmaSimilarityWithTemplate <- function(
   }
   
   Sim <- c( )
+  options( warn = -1 )
   for( Col in 1:ncol( Curves.D1 ) ){
     Sim <- c( Sim, kma.similarity( 
       x.f                = Xaxis, 
@@ -40,6 +41,7 @@ getKmaSimilarityWithTemplate <- function(
       similarity.method  = similarity.method ) )
   }
   Sim <- round( Sim, 4 )
+  options( warn = 0 )
   return( Sim )
 }
 ########################################################################## 
