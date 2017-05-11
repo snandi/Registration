@@ -70,10 +70,7 @@ This is an extension of the function fdakma::kma.similarity. This is using \eqn{
 fdakma::kma.similarity
 }
 \examples{
-require(fda)
-require(fdakma)
-require(ggplot2)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 Arguments <- growth[['age']]

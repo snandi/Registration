@@ -54,10 +54,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 \code{L1median}, \code{rowMeans}, \code{rowWeightedMedians}, \code{rowWeightedMeans}
 }
 \examples{
-require( fda )
-require( fdakma )
-require( robustX )
-data( growth )
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 getWeightedConsensus( Curves = Mat1, abscissa = Arguments )

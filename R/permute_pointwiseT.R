@@ -10,11 +10,12 @@
 # 
 # q = 0.05
 # returnPlot = TRUE
-#'@import fda
-#'@import fdakma
-#'@import ggplot2
+#' @import fda
+#' @import fdakma
+#' @import ggplot2
+#' @importFrom stats quantile
 
-#'@export
+#' @export
 
 permute_pointwiseT <- function(
   Mat1, 

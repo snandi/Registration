@@ -59,11 +59,11 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 adk.test
 }
 \examples{
-  U1 <- rnorm(n = 20, mean = 2, sd = 1)
-  U2 <- rnorm(n = 20, mean = 1, sd = 2)
+  U1 <- stats::rnorm(n = 20, mean = 2, sd = 1)
+  U2 <- stats::rnorm(n = 20, mean = 1, sd = 2)
   
-  V1 <- rnorm(n = 20, mean = 0, sd = 1)
-  V2 <- rnorm(n = 20, mean = 1, sd = 2)
+  V1 <- stats::rnorm(n = 20, mean = 0, sd = 1)
+  V2 <- stats::rnorm(n = 20, mean = 1, sd = 2)
   
   Mat1 <- cbind(U1, U2)
   Mat2 <- cbind(V1, V2)

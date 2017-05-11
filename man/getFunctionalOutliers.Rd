@@ -96,8 +96,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 \code{outliers.depth.trim}, \code{outliers.depth.pond}
 }
 \examples{
-require(fda)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 

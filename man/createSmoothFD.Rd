@@ -75,11 +75,8 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-require( fda )
-require( Registration )
-data( growth )
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
-
 Mat1Smooth <- createSmoothFD( 
   curvesToSmooth = Mat1, 
   abscissa       = 1:nrow( Mat1 ), 

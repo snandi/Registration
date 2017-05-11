@@ -9,16 +9,13 @@
 # Lambda = NULL
 # Ylabel = NULL
 # Xlabel = NULL
-#'@import fda
-#'@import gridExtra
-#'@import ggplot2
-#'@importFrom RFunctionsSN rowSE
-#'@importFrom graphics plot
+#' @import fda
+#' @import gridExtra
+#' @import ggplot2
+#' @importFrom RFunctionsSN rowSE
+#' @importFrom graphics plot par
+#' 
 #@import fdasrvf
-
-# require(ggplot2)
-# require(gridExtra)
-# require(fdasrvf)
 
 plotbyCurve_regist_fda <- function(
   registOutput,
@@ -113,7 +110,7 @@ plotbyCurve_regist_fda <- function(
   if (dim(y0mat)[2] == 1) y0mat = y0mat %*% matrix(1,1,ncurve)
   ylimit   <- c(min(ymat),max(ymat))
   
-  par(mfrow=c(1,2),pty = "s")
+  graphics::par(mfrow=c(1,2),pty = "s")
   i <- 1
   for (i in 1:ncurve) {
     ## ymat: original; 

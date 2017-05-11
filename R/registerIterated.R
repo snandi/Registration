@@ -1,6 +1,9 @@
-#'@import fda
-#'@import ggplot2
-#'@export
+#' @import fda
+#' @import ggplot2
+#' @import robustX
+#' @import fdakma
+#' 
+#' @export
 
 ############################################################################### 
 ## This function conducts iteration registration to weighted average template

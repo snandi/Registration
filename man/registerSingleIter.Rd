@@ -86,10 +86,7 @@ Roughness penalty for smoothing using B-splines
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-require( fda )
-require( fdakma )
-require( robustX )
-data( growth )
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 

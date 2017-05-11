@@ -12,7 +12,7 @@ encodeSmoothFunction(smoothFunc, abscissa)
 \item{abscissa}{A vector representing the x-axis or abscissa}
 }
 \value{
-A \code{string} of encoded form of the function in the form of a sequence of states.
+A \code{string} states representing the encoded form of the smooth function
 }
 \description{
 Encodes a smooth function by its values, first and second derivatives. At each point on
@@ -29,12 +29,12 @@ To use this function for a vector use the function \code{createSmoothFD} to conv
  Arguments <- growth[['age']]
  Mean <- rowMeans( Mat1 )
  MeanFD <- createSmoothFD( 
- curvesToSmooth = Mean,
- abscissa       = Arguments,
- lambdas        = exp( -5:5 ),
- basisBreakFreq = 3,
- basisOrder     = 4,
- pbasis         = NULL )
+     curvesToSmooth = Mean,
+     abscissa       = Arguments,
+     lambdas        = exp( -5:5 ),
+     basisBreakFreq = 3,
+     basisOrder     = 4,
+     pbasis         = NULL )
  MeanStates <- encodeSmoothFunction( smoothFunc = (MeanFD$curvesSmooth)$fd, abscissa = Arguments )
 
 }

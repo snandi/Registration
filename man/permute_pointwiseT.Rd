@@ -83,9 +83,7 @@ This is an adaptation of the function fda::tperm.fd. The theory was first descri
 fda::tperm.fd
 }
 \examples{
-require(fda)
-require(ggplot2)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 Arguments <- growth[['age']]

@@ -54,8 +54,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 permute_pointwiseT, fda::tperm.fd
 }
 \examples{
-require(fda)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 TStats <- return_supTstat(Mat1, Mat2)

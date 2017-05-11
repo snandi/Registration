@@ -10,12 +10,13 @@
 # 
 # q = 0.05
 # returnPlot = TRUE
-#'@import fda
-#'@import fdakma
-#'@import ggplot2
-#'@import RFunctionsSN
+#' @import fda
+#' @import fdakma
+#' @import ggplot2
+#' @import RFunctionsSN
+#' @importFrom stats quantile
 #'
-#'@export
+#' @export
 permute_kmaSimilarity <- function(Mat1, Mat2, Nperm = 200, argvals, q = 0.05, D1 = TRUE){
 
   ## This function returns: 

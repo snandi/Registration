@@ -59,11 +59,7 @@ adk.test
 test_AD_2sample
 }
 \examples{
-require(fda)
-require(adk)
-require(refund)
-require(Registration)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 testOutput <- test_AD_2_CurveSamples(Mat1 = Mat1, Mat2 = Mat2, varpct = 0.95)
@@ -71,5 +67,3 @@ testOutput
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

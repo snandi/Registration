@@ -80,10 +80,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 permute_pointwiseT
 }
 \examples{
-require(fda)
-require(ggplot2)
-%require(Registration)
-data(growth)
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat2 <- growth[['hgtf']]
 Arguments <- growth[['age']]

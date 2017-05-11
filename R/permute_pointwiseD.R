@@ -1,8 +1,9 @@
-#'@import fda
-#'@import fdakma
-#'@import ggplot2
+#' @import fda
+#' @import fdakma
+#' @import ggplot2
+#' @importFrom stats quantile
 
-#'@export
+#' @export
 
 permute_pointwiseD <- function(
   Mat1, 
@@ -53,7 +54,7 @@ permute_pointwiseD <- function(
   Dobs <- max(Dvals)    ## This is the observed value of the test statistic, recommended by fda
   # Tobs <- median(Tvals)    ## This is the observed value of the test statistic
   pval <- mean(Dobs < Dnull)  
-  qval <- quantile(Dnull, q)
+  qval <- stats::quantile(Dnull, q)
   
   pvals.pts <- apply(X = (Dvals < Dnullvals), MARGIN=1, FUN=mean)  ## Pointwise p-value
   qvals.pts <- apply(X = Dnullvals, MARGIN = 1, FUN = quantile, q)    ## Pointwise quantile value

@@ -127,10 +127,7 @@ Subhrangshu Nandi; snandi@wisc.edu or nands31@gmail.com
 \code{register.fd}, \code{registerSingleIter}
 }
 \examples{
-require( fda )
-require( fdakma )
-require( robustX )
-data( growth )
+data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 
