@@ -48,9 +48,6 @@ Scholz, F. W., & Stephens, M. A. (1987). K-sample Anderson–Darling tests. Jour
 %%  ~~who you are~~
 Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands31@gmail.com
 }
-\note{
-%%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

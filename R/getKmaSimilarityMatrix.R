@@ -1,7 +1,7 @@
 #' @import fdakma
 #' @import gtools
 #' @export
-
+#' 
 #' @title Get a pairwise similarity matrix of a group of curves
 #' 
 #' @description Returns pairwise similarity between columns of a matrix of first derivatives of curves, 

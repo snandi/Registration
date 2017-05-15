@@ -55,6 +55,8 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 }
 \examples{
 data( growth, package = 'fda' )
+library( robustX )
+library( matrixStats )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
 getWeightedConsensus( Curves = Mat1, abscissa = Arguments )

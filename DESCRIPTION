@@ -7,7 +7,7 @@ Author: Subhrangshu Nandi
 Maintainer: Subhrangshu Nandi <snandi@wisc.edu>
 Description: Contains functions for iterated, constrained registration, and
     comparison with other registration algorithms to test improvement of sensitivity
-    in detecting differences in two sets of curves
+    in detecting differences in two sets of curves.
 Depends:
     R (>= 3.1)
 LazyData: true
