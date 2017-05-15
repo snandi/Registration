@@ -5,11 +5,11 @@
 # Xlabel=NULL
 # time=Age[-1]
 
-#'@import fda
-#'@import gridExtra
-#'@import ggplot2
+#' @import fda
+#' @importFrom gridExtra grid.arrange
+#' @import ggplot2
 #@import fdasrvf
-#'@import reshape2
+#' @import reshape2
 
 plotbyCurve_regist_fdasrv <- function(registOutput, TrueWarp=NULL, 
                                       time=Age[-1], 

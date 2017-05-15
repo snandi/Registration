@@ -24,8 +24,8 @@ number of rows in matrix curvesToSmooth}
 }
 \value{
 A list of two items
-\item{curvesSmooth} {FDA object of smoothed curves}
-\item{lambdaBest} {lambda associated with minimum GCV}
+\item{curvesSmooth}{FDA object of smoothed curves}
+\item{lambdaBest}{lambda associated with minimum GCV}
 }
 \description{
 For a curve of a matrix this function creates a smooth functional data object as per 
@@ -35,13 +35,12 @@ the definition in R package fda, using bspline basis.
 data( growth, package = 'fda' )
 Mat1 <- growth[['hgtm']]
 Mat1Smooth <- createSmoothFD( 
-  curvesToSmooth = Mat1, 
-  abscissa       = 1:nrow( Mat1 ), 
-  lambdas        = exp( -5:5 ), 
-  basisBreakFreq = 3,
-  basisOrder     = 4,
-  pbasis         = NULL
-)
+   curvesToSmooth = Mat1, 
+   abscissa = 1:nrow( Mat1 ), 
+   lambdas = exp( -5:5 ), 
+   basisBreakFreq = 3, 
+   basisOrder = 4, 
+   pbasis = NULL )
 #plot( (Mat1Smooth$curvesSmooth)$fd )
 
 }

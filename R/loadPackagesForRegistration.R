@@ -5,16 +5,6 @@
 ## It returns a lit of all packages loaded and a list of all packages to be 
 ## loaded in case of parallel computation
 
-#'@import Biostrings
-#'@import car
-#'@import cluster
-#'@import tree
-#'@import fda
-#'@import fdakma
-#'@import ggplot2
-#'@import randomForest
-#'@import robustX
-
 #'@importFrom utils install.packages getCRANmirrors chooseCRANmirror
 #'
 #'@export 

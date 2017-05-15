@@ -9,10 +9,21 @@
 #' 
 #' @details To use this function for a vector use the function \code{createSmoothFD} to convert to a 
 #' \code{fd} object.
+#' For a smooth function \eqn{f(x)}, the eight possible states are as follows:
+#' \itemize{
+#'    \item \eqn{A=(1,1,1): (f>0, f'>0, f''>0)}
+#'    \item \eqn{B=(1,0,1): (f>0, f'\leq 0, f''>0)}
+#'    \item \eqn{C=(1,1,0): (f>0, f'> 0, f''\leq 0)}
+#'    \item \eqn{D=(1,0,0): (f>0, f'\leq 0, f''\leq 0)}
+#'    \item \eqn{E=(0,1,1): (f\leq 0, f'> 0, f''>0)}
+#'    \item \eqn{G=(0,0,1): (f\leq 0, f'\leq 0, f''> 0)}
+#'    \item \eqn{H=(0,1,0): (f\leq 0, f'> 0, f''\leq 0)}
+#'    \item \eqn{I=(0,0,0): (f\leq 0, f'\leq 0, f''\leq 0)}
+#' }
 #' 
 #' @author Subhrangshu Nandi; snandi@wisc.edu or nands31@gmail.com
 #' 
-#' @return A \code{string} states representing the encoded form of the smooth function
+#' @return A \code{string} states representing the encoded form of the smooth function, example "AAHHFFFGGH"
 #' 
 #' @examples
 #'  data( growth, package = 'fda')
@@ -32,6 +43,8 @@
 #' @export
 
 encodeSmoothFunction <- function( smoothFunc, abscissa ){
+  V1 <- V2 <- V3 <- NULL
+  
   if( class( smoothFunc ) != 'fd' ){
     stop( 'smoothFunc needs to be of class fd' )
   }

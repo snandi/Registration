@@ -12,32 +12,19 @@ Depends:
     R (>= 3.1)
 LazyData: true
 Imports:
-    Biostrings,
-    car,
-    cluster,
-    doParallel,
-    dplyr,
+    adk,
     fda,
     fda.usc,
     fdakma,
-    foreach,
-    gbm,
     ggplot2,
+    graphics,
     gridExtra,
     gtools,
-    adk,
-    MASS,
     matrixStats,
-    Metrics,
     mgcv,
-    parallel,
-    plyr,
     refund,
-    randomForest, 
     reshape2,
     RFunctionsSN,
-    robustX,
-    seqinr,
-    tree
+    robustX
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1

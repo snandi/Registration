@@ -1,5 +1,5 @@
 #' @import fdakma
-#' @import gtools
+#' @importFrom gtools combinations
 #' @export
 #' 
 #' @title Get a pairwise similarity matrix of a group of curves

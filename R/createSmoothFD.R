@@ -13,8 +13,8 @@
 #' @param pbasis User-defined \code{pbasis} if user-defined basisObject is desired. Else defaults to NULL.
 #' 
 #' @return A list of two items
-#' \item{curvesSmooth} {FDA object of smoothed curves}
-#' \item{lambdaBest} {lambda associated with minimum GCV}
+#' \item{curvesSmooth}{FDA object of smoothed curves}
+#' \item{lambdaBest}{lambda associated with minimum GCV}
 #' 
 #' @references Graves, S., Hooker, G., & Ramsay, J. (2009). Functional data analysis with R and MATLAB.
 #' 
@@ -23,8 +23,13 @@
 #' @examples 
 #' data( growth, package = 'fda' )
 #' Mat1 <- growth[['hgtm']]
-#' Mat1Smooth <- createSmoothFD( curvesToSmooth = Mat1, abscissa = 1:nrow( Mat1 ), lambdas = exp( -5:5 ), 
-#' basisBreakFreq = 3, basisOrder = 4, pbasis = NULL )
+#' Mat1Smooth <- createSmoothFD( 
+#'    curvesToSmooth = Mat1, 
+#'    abscissa = 1:nrow( Mat1 ), 
+#'    lambdas = exp( -5:5 ), 
+#'    basisBreakFreq = 3, 
+#'    basisOrder = 4, 
+#'    pbasis = NULL )
 #' #plot( (Mat1Smooth$curvesSmooth)$fd )
 #' 
 #' @seealso \code{fda::create.basis}, \code{fda::create.bspline.basis}

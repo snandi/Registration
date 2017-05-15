@@ -7,12 +7,10 @@
 ## for functional data with application to a diffusion tensor imaging study of multiple sclerosis. 
 ## Journal of the Royal Statistical Society: Series C ( Applied Statistics ).
 
-#'@import adk 
-#'@import mgcv
-#'@import refund
-#'@import MASS
+#' @import refund
+#' @import MASS
 
-#'@export
+#' @export
 
 test_AD_2_CurveSamples <- function( Mat1, Mat2, varpct = 0.95 ){ 
 
@@ -28,7 +26,7 @@ test_AD_2_CurveSamples <- function( Mat1, Mat2, varpct = 0.95 ){
 
   Data_Combined <- cbind(Mat1, Mat2)
 
-  FPCA.out <- fpca.sc(Y = t(Data_Combined), var = TRUE, pve = varpct)
+  FPCA.out <- refund::fpca.sc(Y = t(Data_Combined), var = TRUE, pve = varpct)
   
   scores1 <- FPCA.out$scores[1:n1,]
   scores2 <- FPCA.out$scores[(n1 + 1):(n1 + n2),]  

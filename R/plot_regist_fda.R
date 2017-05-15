@@ -10,7 +10,7 @@
 # Ylabel = NULL
 # Xlabel = NULL
 #' @import fda
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #' @import ggplot2
 #' @importFrom RFunctionsSN rowSE
 #' @importFrom graphics plot par

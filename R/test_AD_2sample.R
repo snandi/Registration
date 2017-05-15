@@ -6,8 +6,8 @@
 ###########################################################################################################
 #require( adk )
 
-#'@import adk 
-#'@export
+#' @importFrom  adk adk.test
+#' @export
 
 test_AD_2sample <- function( datX, datY, p ){ 
   #p the dimension of the multivariate data

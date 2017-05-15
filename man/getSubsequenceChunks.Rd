@@ -58,5 +58,5 @@ getSubsequenceChunks(
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~DNA sequence }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~subsequence }% __ONLY ONE__ keyword per line
+\keyword{ DNA sequence }% use one of  RShowDoc("KEYWORDS")
+\keyword{ subsequence }% __ONLY ONE__ keyword per line

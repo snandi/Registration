@@ -12,7 +12,7 @@ encodeSmoothFunction(smoothFunc, abscissa)
 \item{abscissa}{A vector representing the x-axis or abscissa}
 }
 \value{
-A \code{string} states representing the encoded form of the smooth function
+A \code{string} states representing the encoded form of the smooth function, example "AAHHFFFGGH"
 }
 \description{
 Encodes a smooth function by its values, first and second derivatives. At each point on
@@ -22,6 +22,17 @@ sequence of states
 \details{
 To use this function for a vector use the function \code{createSmoothFD} to convert to a 
 \code{fd} object.
+For a smooth function \eqn{f(x)}, the eight possible states are as follows:
+\itemize{
+   \item \eqn{A=(1,1,1): (f>0, f'>0, f''>0)}
+   \item \eqn{B=(1,0,1): (f>0, f'\leq 0, f''>0)}
+   \item \eqn{C=(1,1,0): (f>0, f'> 0, f''\leq 0)}
+   \item \eqn{D=(1,0,0): (f>0, f'\leq 0, f''\leq 0)}
+   \item \eqn{E=(0,1,1): (f\leq 0, f'> 0, f''>0)}
+   \item \eqn{G=(0,0,1): (f\leq 0, f'\leq 0, f''> 0)}
+   \item \eqn{H=(0,1,0): (f\leq 0, f'> 0, f''\leq 0)}
+   \item \eqn{I=(0,0,0): (f\leq 0, f'\leq 0, f''\leq 0)}
+}
 }
 \examples{
  data( growth, package = 'fda')

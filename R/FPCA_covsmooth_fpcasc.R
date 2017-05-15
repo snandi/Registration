@@ -38,11 +38,11 @@
 # require(refund)
 # require(MASS)
 
-#'@import mgcv
-#'@import refund
-#'@import MASS
+#' @import mgcv
+#' @import refund
+#' @import MASS
 
-#'@export
+#' @export
 ########################################################################################################
 ### Smoothing of an existent covariance matrix
 ########################################################################################################
