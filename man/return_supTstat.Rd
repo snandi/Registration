@@ -62,5 +62,5 @@ names(TStats)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ Functional t-test }
-\keyword{ testing }% __ONLY ONE__ keyword per line
+\keyword{ functional-Ttest }
+\keyword{ hypothesis-testing }% __ONLY ONE__ keyword per line

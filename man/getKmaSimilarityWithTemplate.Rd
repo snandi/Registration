@@ -88,5 +88,4 @@ getKmaSimilarityWithTemplate(
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ similarity }% use one of  RShowDoc("KEYWORDS")
-\keyword{ functional data }% __ONLY ONE__ keyword per line
-\keyword{ fda }
+\keyword{ functional-data }% __ONLY ONE__ keyword per line

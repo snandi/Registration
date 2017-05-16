@@ -78,6 +78,6 @@ test <- FPCA_covsmooth_fpcasc(cd1,cd2, threshold = 0.96)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ fpca }
-\keyword{ testing }
-\keyword{ functional data }% __ONLY ONE__ keyword per line
+\keyword{ functional-pca }
+\keyword{ hypothesis-testing }
+\keyword{ functional-data }% __ONLY ONE__ keyword per line

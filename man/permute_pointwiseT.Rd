@@ -101,5 +101,5 @@ names(PermTestResults)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ permutation }
-\keyword{ testing }
+\keyword{ hypothesis-testing }
 \keyword{ curves }% __ONLY ONE__ keyword per line
