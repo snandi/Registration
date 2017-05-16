@@ -1,4 +1,6 @@
-#'@export
+#' @importFrom seqinr s2c
+#' @export
+#' 
 ########################################################################
 ## This function takes in a DNA sequence "agggctattaaccctttaaa" and returns    
 ## smaller subsequence chunks based on user specified length. This    
@@ -12,6 +14,12 @@ getSubsequenceChunks <- function(
 ) { 
   ## The argument force.number.of.groups=TRUE means it will append the 
   ## remainder of the elements to the last chunk
+  
+  ## Sequence should be a list of characters instead of a long string
+  if( length( Sequence ) == 1 ){
+    Sequence <- seqinr::s2c( Sequence )
+  }
+  
   len <- length( Sequence )
   groups <- trunc( len/numChunks )
   overflow <- len%%numChunks 

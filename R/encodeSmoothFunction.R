@@ -85,8 +85,9 @@ getEncodingStates <- function(){
 
 getStateName <- function( Row, AllStates ){
   StateName <- ''
+  Order <- length( AllStates[[1]] )
   for( i in 1:length( AllStates ) ){
-    if ( sum( unlist( Row ) == AllStates[[i]] ) == 3 ){
+    if ( sum( unlist( Row ) == AllStates[[i]] ) == Order ){
       StateName <- names( AllStates[i] ) 
     }
   }

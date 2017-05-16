@@ -5,7 +5,7 @@
 Get subsequence chunks from a long sequence
 }
 \description{
-This function takes in a DNA sequence "agggctattaaccctttaaa" in the form of an array of characters and returns smaller subsequence chunks based on user specified number
+This function takes in a DNA sequence "agggctattaaccctttaaa" in the form of a list of characters and returns smaller subsequence chunks based on user specified number.
 }
 \usage{
 getSubsequenceChunks( Sequence, numChunks, force.number.of.groups = TRUE )
@@ -13,7 +13,7 @@ getSubsequenceChunks( Sequence, numChunks, force.number.of.groups = TRUE )
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Sequence}{
-A DNA sequence in the form of an array of characters: "a" "g" "g" "c" "t"
+A DNA sequence in the form of a list of characters: "a" "g" "g" "c" "t", similar to the output of \code{seqinr::s2c}
 }
   \item{numChunks}{
 Number of subsequence chunks desired
@@ -52,7 +52,7 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 \examples{
 %library( seqinr )
 getSubsequenceChunks( 
-  Sequence = seqinr::s2c( "agggctattaaccctttaaa" ), 
+  Sequence = "agggctattaaccctttaaa", 
   numChunks = 3, 
   force.number.of.groups = TRUE )
 }
