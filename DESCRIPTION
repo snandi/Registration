@@ -20,11 +20,13 @@ Imports:
     graphics,
     gridExtra,
     gtools,
+    MASS,
     matrixStats,
     mgcv,
     refund,
     reshape2,
     RFunctionsSN,
-    robustX
+    robustX,
+    seqinr
 License: The MIT License (MIT)
 RoxygenNote: 5.0.1
