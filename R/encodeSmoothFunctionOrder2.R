@@ -19,7 +19,7 @@
 #' 
 #' @author Subhrangshu Nandi, PhD Statistics; snandi@wisc.edu or nands31@gmail.com
 #' 
-#' @return A \code{string} states representing the encoded form of the smooth function, example "AADDCCCB"
+#' @return A \code{string} of states representing the encoded form of the smooth function, example "AADDCCCB"
 #' 
 #' @examples
 #'  data( growth, package = 'fda')

@@ -12,7 +12,7 @@ encodeSmoothFunctionOrder2(smoothFunc, abscissa)
 \item{abscissa}{A vector representing the x-axis or abscissa}
 }
 \value{
-A \code{string} states representing the encoded form of the smooth function, example "AADDCCCB"
+A \code{string} of states representing the encoded form of the smooth function, example "AADDCCCB"
 }
 \description{
 Encodes a smooth function by its values and first derivatives. At each point on
