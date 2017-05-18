@@ -3,6 +3,8 @@
 export(FPCA_covsmooth_fpcasc)
 export(createSmoothFD)
 export(encodeSmoothFunction)
+export(encodeSmoothFunctionOrder1)
+export(encodeSmoothFunctionOrder12)
 export(encodeSmoothFunctionOrder2)
 export(getFunctionalOutliers)
 export(getKmaSimilarityMatrix)
