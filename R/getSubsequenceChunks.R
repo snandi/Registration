@@ -1,12 +1,30 @@
+#' @title Get subsequence chunks from a long sequence
+#' 
+#' @description This function takes in a DNA sequence "agggctattaaccctttaaa" in the form of a list of 
+#' characters and returns smaller subsequence chunks based on user specified number.
+#' 
+#' @param Sequence A DNA sequence in the form of a list of characters: "a" "g" "g" "c" "t", similar 
+#' to the output of \code{seqinr::s2c}
+#' @param numChunks Number of subsequence chunks desired
+#' @param force.number.of.groups Defaults to \code{TRUE}. If \code{TRUE}, then it will append the 
+#' remainder of the elements to the last chunk
+#' 
+#' @author Subhrangshu Nandi; PhD, Statistics; snandi@wisc.edu or nands31@gmail.com
+#' 
+#' @return Returns a list of subsequence chunks.
+#' 
+#' @examples
+#' getSubsequenceChunks( 
+#'   Sequence = "agggctattaaccctttaaa", 
+#'   numChunks = 3, 
+#'   force.number.of.groups = TRUE )
+#'
+#' @keywords DNA-sequence subsequence
+#'  
 #' @importFrom seqinr s2c
 #' @export
 #' 
-########################################################################
-## This function takes in a DNA sequence "agggctattaaccctttaaa" and returns    
-## smaller subsequence chunks based on user specified length. This    
-## was adapted from a function chunks.2 found online
-## This was fn_subseq in Project_CurveReg
-########################################################################
+
 getSubsequenceChunks <- function( 
   Sequence, 
   numChunks, 
