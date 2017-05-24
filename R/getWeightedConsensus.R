@@ -1,6 +1,6 @@
 #' @import fda
 #' @import fdakma
-#' @import matrixStats
+#' @importFrom matrixStats rowWeightedMedians rowWeightedMeans
 #' @import robustX
 #' @export
 
