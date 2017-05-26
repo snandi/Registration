@@ -29,5 +29,5 @@ Imports:
     RFunctionsSN,
     robustX,
     seqinr
-License: The MIT License (MIT)
+License: MIT + file LICENSE
 RoxygenNote: 5.0.1
