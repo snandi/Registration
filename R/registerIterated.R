@@ -2,6 +2,7 @@
 #' @import ggplot2
 #' @import robustX
 #' @import fdakma
+#' @import FscanStats
 #' 
 #' @export
 
@@ -129,10 +130,10 @@ registerIterated <- function(
       
       ## Estimate Similarity with Template before registration
       options( warn = -1 )
-      Sim_Before_Regist <- getKmaSimilarityWithTemplate(
-        Mat               = dataToRegister, 
-        Template          = templateToRegister,
-        Xaxis             = abscissa,
+      Sim_Before_Regist <- FscanStats::getKmaSimilarityWithTemplate(
+        curves            = dataToRegister, 
+        template          = templateToRegister,
+        abscissa          = abscissa,
         similarity.method = c( "d1.pearson" ),
         Deriv             = FALSE
       )
@@ -158,9 +159,9 @@ registerIterated <- function(
       ## Estimate Similarity with Template after registration      
       options( warn = -1 )
       Sim_After_Regist <- getKmaSimilarityWithTemplate(
-        Mat               = Regfd1_eval, 
-        Template          = templateToRegister,
-        Xaxis             = abscissa,
+        curves            = Regfd1_eval, 
+        template          = templateToRegister,
+        abscissa          = abscissa,
         similarity.method = "d1.pearson",
         Deriv             = FALSE
       )
@@ -257,9 +258,9 @@ registerIterated <- function(
       ## Estimate Similarity with Template after registration      
       options( warn = -1 )
       Sim_After_Regist <- getKmaSimilarityWithTemplate(
-        Mat               = Regfd1_eval, 
-        Template          = templateToRegister,
-        Xaxis             = abscissa,
+        curves            = Regfd1_eval, 
+        template          = templateToRegister,
+        abscissa          = abscissa,
         similarity.method = "d1.pearson",
         Deriv             = FALSE
       )

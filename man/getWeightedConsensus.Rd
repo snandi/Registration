@@ -55,11 +55,9 @@ Subhrangshu Nandi; Statistics PhD student, UW Madison; snandi@wisc.edu or nands3
 }
 \examples{
 data( growth, package = 'fda' )
-library( robustX )
-library( matrixStats )
 Mat1 <- growth[['hgtm']]
 Arguments <- growth[['age']]
-getWeightedConsensus( Curves = Mat1, abscissa = Arguments )
+%getWeightedConsensus( Curves = Mat1, abscissa = Arguments )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

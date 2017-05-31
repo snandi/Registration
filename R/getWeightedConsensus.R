@@ -2,6 +2,8 @@
 #' @import fdakma
 #' @importFrom matrixStats rowWeightedMedians rowWeightedMeans
 #' @import robustX
+#' @import FscanStats
+#' 
 #' @export
 
 ###############################################################################
@@ -11,10 +13,10 @@ getWeightedConsensus <- function( Curves, abscissa ){
   medianCurves <- robustX::L1median( t( Curves ) )$estimate
   
   options( warn = -1 )
-  Sim_All <- getKmaSimilarityWithTemplate(
-    Mat               = Curves, 
-    Template          = medianCurves,
-    Xaxis             = abscissa,
+  Sim_All <- FscanStats::getKmaSimilarityWithTemplate(
+    curves            = Curves, 
+    template          = medianCurves,
+    abscissa          = abscissa,
     similarity.method = c( "d1.pearson" ),
     Deriv             = FALSE
   )

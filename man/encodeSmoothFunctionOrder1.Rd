@@ -22,7 +22,7 @@ sequence of states
 \details{
 To use this function for a vector use the function \code{createSmoothFD} to convert to a 
 \code{fd} object.
-For a smooth function \eqn{f(x)}, the eight possible states are as follows:
+For a smooth function \eqn{f(x)}, the two possible states are as follows:
 \itemize{
    \item \eqn{A=(1): (f'>0)}
    \item \eqn{B=(0): (f'\leq 0)}
